@@ -1,7 +1,6 @@
 ---
 layout: post
-title: "Machine Learning Fundamentals" Book
-categories: misc
+title: "Machine Learning Fundamentals"
 ---
 
 The companion repository for the book [**Machine Learning Fundamentals**](https://www.amazon.com/Machine-Learning-Fundamentals-Concise-Introduction/dp/1108940021) by [*Hui Jiang*](https://wiki.eecs.yorku.ca/user/hj/), 
