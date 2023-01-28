@@ -1,5 +1,5 @@
 ---
 layout: home
-title: "Blogs on Machine Learning and AI"
+title: "Hui Jiang at York University"
 author: "Hui Jiang"
 ---
