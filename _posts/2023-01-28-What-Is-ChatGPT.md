@@ -2,7 +2,6 @@
 layout: post
 title: "What Is ChatGPT"
 date: 2023-01-28 
-categories: CATEGORY-1 CATEGORY-2
 ---
 
 Here I would like to use plain language to briefly explain what ChatGPT is and how it works.  
