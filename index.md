@@ -5,4 +5,4 @@ title: "Hui Jiang's Blogs on Machine Learning"
 
 ## Jan 28, 2023: [What is ChatGPT](_posts/2023-01-28-What-Is-ChatGPT.md)
 
-## Jan 20, 2022: [Machine Learning Fundamentals](_post/2022-01-20-Machine-Learning-Fundamentals.md)
+## Jan 20, 2022: [Machine Learning Fundamentals](_posts/2022-01-20-Machine-Learning-Fundamentals.md)
