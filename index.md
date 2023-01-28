@@ -1,10 +1,21 @@
 # "Machine Learning Fundamentals" Book
-The companion repository for the book [**Machine Learning Fundamentals**]
-(https://www.amazon.com/Machine-Learning-Fundamentals-Concise-Introduction/dp/[*Hui Jiang*](https://wiki.eecs.yorku.ca/user/hj/) 2021, 
-published by Cambridge University Press.1108940021) 
+
+The companion repository for the book [**Machine Learning Fundamentals**](https://www.amazon.com/Machine-Learning-Fundamentals-Concise-Introduction/dp/1108940021) [*Hui Jiang*](https://wiki.eecs.yorku.ca/user/hj/) 2021, 
+published by Cambridge University Press.
 
 ## Slides per chapter (Detailed  contents is [here](materials/DetailedContents.pdf))
 
-- **Ch 1: Introduction**    ([slides](materials/slides/ch1_Introduction.pdf))
-- **Ch 2:  Mathematical Foundation**  ([slides](materials/slides/ch2_Mathematical_Foundation.pdf))
-- **Ch 3: Supervised Machine Learning (in a nutshell)** ([slides](materials/slides/ch3_Supervised_Machine_Learning.pdf))
+- **Ch 1: Introduction**    ([slides](https://wiki.eecs.yorku.ca/user/hj/_media/research:ch1_introduction.pdf))
+- **Ch 2:  Mathematical Foundation**  ([slides](https://wiki.eecs.yorku.ca/user/hj/_media/research:ch2_mathematical_foundation.pdf))
+- **Ch 3: Supervised Machine Learning (in a nutshell)** ([slides](https://wiki.eecs.yorku.ca/user/hj/_media/research:ch3_supervised_machine_learning.pdf))
+
+## Citation (bibtex):
+```
+@book{Jiang-MLF-2021, 
+  author = {Hui Jiang},
+  title = {Machine Learning Fundamentals}, 
+  publisher = {Cambridge University Press},
+  year = {2021} 
+}
+```
+
