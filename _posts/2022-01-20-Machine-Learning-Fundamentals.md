@@ -3,8 +3,8 @@ layout: page
 title: "Machine Learning Fundamentals"
 ---
 
-<div style="center ">
-<img   src="https://wiki.eecs.yorku.ca/user/hj/_media/research:mlb-book-cover-small.jpg" width="180"> 
+<div style="text-align: center">
+<img src="https://wiki.eecs.yorku.ca/user/hj/_media/research:mlb-book-cover-small.jpg" width="180"> 
 </div> 
 
 This post provides complementary materials for my recent textbook [**Machine Learning Fundamentals**](https://www.amazon.com/Machine-Learning-Fundamentals-Concise-Introduction/dp/1108940021) by [*Hui Jiang*](https://wiki.eecs.yorku.ca/user/hj/), Cambridge University Press, 2021.
