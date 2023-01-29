@@ -23,7 +23,7 @@ minima:
   #
   social_links:
     - { platform: github,         user_url: "https://github.com/iNCML/incml.github.io" }
-    - { platform: google_scholar, user_url: "https://scholar.google.ca/citations?user=lQi05ZkAAAAJ&hl=en" }
+    - { platform: googlescholar, user_url: "https://scholar.google.ca/citations?user=lQi05ZkAAAAJ&hl=en" }
   #   - { platform: devto,          user_url: "https://dev.to/jekyll" }
   #   - { platform: dribbble,       user_url: "https://dribbble.com/jekyll" }
   #   - { platform: facebook,       user_url: "https://www.facebook.com/jekyll" }
