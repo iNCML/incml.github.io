@@ -3,7 +3,7 @@ layout: page
 title: "Machine Learning Fundamentals"
 ---
 
-<div style="float:left">
+<div style="float:left;">
 <img  src="https://wiki.eecs.yorku.ca/user/hj/_media/research:mlb-book-cover-small.jpg" width="180"> 
 </div> 
 
