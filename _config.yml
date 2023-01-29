@@ -22,7 +22,7 @@ minima:
   # Generate social links in footer.
   #
   social_links:
-    - { platform: github,           user_url: "https://github.com/iNCML/incml.github.io" }
+  #  - { platform: github,           user_url: "https://github.com/iNCML/incml.github.io" }
     - { platform: googlescholar,    user_url: "https://scholar.google.ca/citations?user=lQi05ZkAAAAJ&hl=en" }
     - { platform: twitter,          user_url: "https://twitter.com/jekyllrb" }
   #   - { platform: devto,          user_url: "https://dev.to/jekyll" }
