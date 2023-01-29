@@ -1,12 +1,8 @@
 title: Jiang's Blogs
 author: 
   name: Hui Jiang
-  email: hj@eecs.yorku.ca
+  email: huijiang@yorku.ca
 description: >
   Hui Jiang's technology blogs on machine learning and AI 
   
 theme: minima
-
-plugins:
-  - jekyll-feed
-  - jekyll-seo-tag
