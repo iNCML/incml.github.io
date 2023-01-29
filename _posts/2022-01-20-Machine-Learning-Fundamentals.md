@@ -27,7 +27,7 @@ This post provides complementary materials for my recent textbook [**Machine Lea
 - **Ch 14: Bayesian Learning** ([slides](https://wiki.eecs.yorku.ca/user/hj/_media/research:ch14_bayesian_learning.pdf))
 - **Ch 15: Graphical Models** ([slides](https://wiki.eecs.yorku.ca/user/hj/_media/research:ch15_graphical_models.pdf))
 
-### Lab Projects (using Jupyter Notebooks and/or Matlab)
+### Lab Projects (using Jupyter Notebooks)
 
 - **Lab 0**: [Preparation](https://github.com/iNCML/MachineLearningBook/blob/master/labs/pdf/Lab0_Preparation.pdf)  (available at [Colab](https://colab.research.google.com/drive/1nB-uULhbpFTqlUOekEW3272eqKJg6qok?usp=sharing), [ipynb](https://github.com/iNCML/MachineLearningBook/blob/master/labs/ipynb/Lab0_Preparation.ipynb)) 
 - **Lab 1**: [Data Visualization](https://github.com/iNCML/MachineLearningBook/blob/master/labs/pdf/Lab1_Data_Visualization.pdf) (available at [Colab](https://colab.research.google.com/drive/1zE2OrdJNkmzzn30CdDsj1y9qz585-afF?usp=sharing), [ipynb](https://github.com/iNCML/MachineLearningBook/blob/master/labs/ipynb/Lab1_Data_Visualization.ipynb))
