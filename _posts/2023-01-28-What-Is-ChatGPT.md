@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "What Is ChatGPT"
-excerpts: "This is an accessible introduction to explain what ChatGPT is and how it works. It uses plain language to aim at general audience without any technical background in machine learning."
+excerpt: "This is an accessible introduction to explain what ChatGPT is and how it works. It uses plain language to aim at general audience without any technical background in machine learning."
 date: 2023-01-28 
 ---
 
