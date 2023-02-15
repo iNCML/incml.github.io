@@ -23,7 +23,7 @@ Through these test cases, we will examine *ChatGPT*'s performance in various log
 
 While I have designed and tested *ChatGPT* with dozens of test cases, in this post, I will report and discuss 10 representative ones. It is worth noting that the number of test cases in this study is relatively small. Therefore, readers are encouraged to create their own test cases to assess *ChatGPT*'s reasoning abilities in even more diverse situations.
 
-### ***ChatGPT* on Deductive Reasoning**
+### **ChatGPT on Deductive Reasoning**
 
 Firstly, we will consider some complex scenarios to test *ChatGPT*'s deductive reasoning capabilities. In Example 1, we demonstrate that *ChatGPT* is able to accurately answer a complex factual question that has posed a challenge for previous Q&A systems. This question requires at least two reasoning steps: firstly, identifying all the relevant countries, and secondly, inferring the capitals of these countries. Although the question does not explicitly state these two steps, *ChatGPT* is capable of understanding what is implied and can successfully perform these two reasoning steps to arrive at the correct answer.
 
