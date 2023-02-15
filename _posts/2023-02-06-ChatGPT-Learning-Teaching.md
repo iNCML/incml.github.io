@@ -4,7 +4,7 @@ title: "How will ChatGPT Affect Our Teaching and Learning?"
 date: 2023-02-06 
 ---
 
-*In this post, I will address the pressing challenges posed byChatGPT  to our current post-secondary education systems in universities and colleges. Additionally, I will explore the far-reaching impacts that ChatGPT implies for the future of online learning and how we will engage in it.*
+*In this post, I will address the pressing challenges posed by ChatGPT  to our current post-secondary education systems in universities and colleges. Additionally, I will explore the far-reaching impacts that ChatGPT implies for the future of online learning and how we will engage in it.*
 <br><br>
 
 I firmly believe that *ChatGPT*, as a groundbreaking IT product, will eventually become a daily necessity for billions of users and transform various aspects of our lives, including how we live, work, learn, and teach. In this follow-up blog post (after my last post - [What is ChatGPT](https://incml.github.io/2023/01/28/What-Is-ChatGPT.html)), I will first discuss the immediate impacts of *ChatGPT* on current teaching methods in universities and colleges. Following that, I will explore other effects that *ChatGPT* will soon have on how we learn in our daily lives.
