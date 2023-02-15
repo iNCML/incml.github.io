@@ -113,7 +113,7 @@ In Example 10, it is demonstrated how *ChatGPT* can handle a complex argument th
 
 In conclusion, the examples presented above clearly demonstrate *ChatGPT*'s remarkable abilities in performing complex logical reasoning tasks in open domains. Prior to the advent of *ChatGPT*, it was unimaginable for computers to solve such unconstrained reasoning tasks. However, within such a short time frame, *ChatGPT* has successfully solved these tasks, displaying strong reasoning skills that are comparable to those of humans.
 
-### **How Has ChatGPT Acquired Reasoning Skills**
+### **How Has ChatGPT Acquired Reasoning Skills?**
 
 In this section, we will briefly discuss how *ChatGPT* has developed its remarkable logical reasoning abilities. Due to the training process and the enormous size of its underlying model (see my previous post [What is ChatGPT?](https://incml.github.io/2023/01/28/What-Is-ChatGPT.html)), it is reasonable to believe that *ChatGPT* can effortlessly store all information from its extensive training set. However, memorization alone is not sufficient for abstraction and reasoning skills.
 
