@@ -3,7 +3,7 @@ layout: post
 title: "How Good is ChatGPT at Logical Reasoning?"
 date: 2023-02-14 
 ---
-*In this post, I have employed open-domain test cases to explore *ChatGPT*'s proficiency in logical reasoning. The examples presented have demonstrated unequivocally that *ChatGPT* possesses remarkable logical reasoning skills, enabling it to solve a diverse set of open-domain reasoning tasks with outstanding performance.*
+*In this post, I have employed open-domain test cases to explore ChatGPT's proficiency in logical reasoning. The examples presented have demonstrated unequivocally that ChatGPT possesses remarkable logical reasoning skills, enabling it to solve a diverse set of open-domain reasoning tasks with outstanding performance.*
 <br><br>
 
 Logical reasoning is a fundamental aspect of human intelligence, but for a long time, computers have been unable to handle even basic reasoning tasks. Despite significant AI research efforts in recent decades, it has been widely believed that computers are incapable of performing meaningful logical reasoning in open-domain tasks. However, in a groundbreaking development, *ChatGPT* has demonstrated an astonishingly superior ability to perform logical reasoning in a wide range of unconstrained tasks, approaching or even matching human performance in many complex reasoning tasks.
@@ -135,9 +135,9 @@ It has also been suggested that *ChatGPT* has primarily acquired its understandi
 
 $[1]$  Howard E Gardner, *Frames of Mind: The Theory of Multiple Intelligences*, 2011.
 
-$[2]$  Logical Reasoning, Retrieved February 10, 2023, from https://en.wikipedia.org/wiki/Logical_reasoning.
+$[2]$  Logical Reasoning, Retrieved February 10, 2023, from [https://en.wikipedia.org/wiki/Logical_reasoning](https://en.wikipedia.org/wiki/Logical_reasoning).
 
 $[3]$ Tom Brown, Benjamin Mann, *et. al.*, *Language Models are Few-Shot Learners*, 
-arXiv, 2020, from https://arxiv.org/abs/2005.14165.
+arXiv, 2020, from [https://arxiv.org/abs/2005.14165](https://arxiv.org/abs/2005.14165).
 
 $[4]$ Jeff Hawkins, *A Thousand Brains: A New Theory of Intelligence*, 2021.
