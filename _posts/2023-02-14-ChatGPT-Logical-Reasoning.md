@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "How Good is ChatGPT at Logical Reasoning?"
-date: 2023-02-16 
+date: 2023-02-14 
 ---
 *In this post, I have employed open-domain test cases to explore *ChatGPT*'s proficiency in logical reasoning. The examples presented have demonstrated unequivocally that *ChatGPT* possesses remarkable logical reasoning skills, enabling it to solve a diverse set of open-domain reasoning tasks with outstanding performance.*
 <br><br>
