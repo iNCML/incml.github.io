@@ -7,15 +7,18 @@ date: 2023-03-05
 <br><br>
 
 Transformers $[1]$ are a type of neural network architecture designed to transform a sequence of $T$ input vectors, 
+
 $$
  \{ \mathbf{x}_1, \mathbf{x}_2, \cdots, \mathbf{x}_T \}
  \;\;\;\;\;(\mathbf{x}_i \in \mathbb{R}^d, \; \forall i=1,2,\cdots,T),
  $$ 
-  into an equal-length sequence of context-dependent output vectors:
+
+into an equal-length sequence of context-dependent output vectors:
+
 $$
  \{ \mathbf{y}_1, \mathbf{y}_2, \cdots, \mathbf{y}_T \}
  \;\;\;\;\;(\mathbf{y}_i \in \mathbb{R}^o, \; \forall i=1,2,\cdots,T).
- $$ 
+$$ 
 
 The output sequence in a transformer model is referred to as *context-dependent* because each output vector is influenced not only by the corresponding input vector but also by the context of the entire input sequence. Specifically, each output vector $\mathbf{y}_i$ depends on all input vectors in the sequence, not just $\mathbf{x}_i$ at the same position. As a result, each output vector can be viewed as a representation of not only the input vector at the same location but also its contextual information in the entire sequence.
 
