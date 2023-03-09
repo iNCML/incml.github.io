@@ -155,6 +155,7 @@ $$
 Let's break down all attention operations in a transformer in Figure 1 step by step backwards from the output towards input as follows:
 
 - **Backward step 1:** we have 
+
 $$
 \mathbf{z}_t = \sum_{i=1}^T a_i(t) \mathbf{v}_i\;\;\;\;\;\;\;\;\;\; (\forall t = 1,2, \cdots, T)
 $$
@@ -401,7 +402,7 @@ $$
 is fed into *GPT-3* as input $\mathbf{X} \in \mathbb{R}^{12288\times 2048}$. For each time step $t=1,2,\cdots,2047$, *GPT-3* is trained to predict the token at position $t+1$ based on all vectors appearing up to position $t$, i.e., ${\mathbf{x}_1, \cdots, \mathbf{x}_t}$. 
 Once trained, *GPT-3* can generate new sequences by feeding a sequence of vectors as a prompt. The model generates the probabilities of the next tokens based on the prompt, and then samples a new token accordingly. The sampled token is then added to the prompt to generate the next token. This process is repeated until a termination token is generated.
 
-  ### **References**
+### **References**
 
 $[1]$  Ashish Vaswani, Noam Shazeer, *et.al.*, *Attention Is All You Need*, [arXiv, 1706,03762](https://arxiv.org/abs/1706.03762), 2017. 
 
