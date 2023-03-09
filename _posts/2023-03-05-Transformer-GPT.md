@@ -358,7 +358,7 @@ The authors of $[4]$ propose a deep multi-head transformer structure named *GPT-
 
 To begin, *GPT-3* employs a tokenizer to split any text sequence into a sequence of tokens (each token is a common word fragment). These tokens are then transformed into vectors of $d=12288$ dimensions using a word embedding matrix $\mathbf{W}_0 \in \mathbb{R}^{12288 \times 50257}$. Subsequently, the input sequence $\mathbf{X} \in \mathbb{R}^{12288 \times 2048}$ is transformed into $\mathbf{Y} \in \mathbb{R}^{12288 \times 2048}$ using 96 layers of multi-head transformer blocks. Each block is defined as follows:
 
-1. Each multi-head transformer in *GPT-3* uses $96$ heads:
+**(1)** Each multi-head transformer in *GPT-3* uses $96$ heads:
 $\mathbf{A}^{(j)}, \mathbf{B}^{(j)}, \mathbf{C}^{(j)} \in \mathbb{R}^{128 \times 12288} \;\;\; (j=1,2, \cdots, 96)$, which compute for all $j=1,2,\cdots,T$
 
 $$
@@ -367,7 +367,7 @@ $$
     \big( \mathbf{B}^{(j)} \mathbf{X} \big)/\sqrt{128}\Big) 
 $$
 
-2. Concatenate the outputs from all heads:
+**(2)** Concatenate the outputs from all heads:
 
 $$
 \mathbf{Z} \in \mathbb{R}^{12288 \times 2048} =  \mathbf{W}^o \textrm{concat}\big(\mathbf{Z}^{(1)}, \cdots, \mathbf{Z}^{(96)}\big)
@@ -375,13 +375,13 @@ $$
 
 where $\mathbf{W}^o \in \mathbb{R}^{12288\times12288}$.
 
-3. Apply layer normalization to each column of $\mathbf{Z}$: $\mathbf{z}_t \in \mathbb{R}^{12288} \; (\forall t=1,2,\cdots,2048)$ as
+**(3)** Apply layer normalization to each column of $\mathbf{Z}$: $\mathbf{z}_t \in \mathbb{R}^{12288} \; (\forall t=1,2,\cdots,2048)$ as
 
 $$
   \bar{\mathbf{z}}_t = \mathbf{x}_t + \textrm{LN}_{\gamma,\beta} \big(\mathbf{z}_t \big)
 $$
 
-4. Apply nonlinearity to each column as: 
+**(4)** Apply nonlinearity to each column as: 
 
 $$
    \mathbf{y}_t= \bar{\mathbf{z}}_t + \textrm{feedforward} \big( \bar{\mathbf{z}}_t\big) 
