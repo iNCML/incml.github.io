@@ -154,7 +154,8 @@ $$
 
 Let's break down all attention operations in a transformer in Figure 1 step by step backwards from the output towards input as follows:
 
-- **Backward step 1:** we have $ \mathbf{z}_t = \sum_{i=1}^T a_i(t) \mathbf{v}_i\;\;\;\;\;\;\;\;\;\; (\forall t = 1,2, \cdots, T)$
+- **Backward step 1:** we have 
+$\mathbf{z}_t = \sum_{i=1}^T a_i(t) \mathbf{v}_i\;\;\;\;\;\;\;\;\;\; (\forall t = 1,2, \cdots, T)$
 
 According to the chain rule, we can compute
 
@@ -175,7 +176,20 @@ $$
 
 - **Backward step 2:** we normalize as $a_i(t) = \frac{e^{c_i(t)}}{\sum_{j=1}^T e^{c_j(t)}} \;\;\;\;\;\; (\forall i,t = 1,2, \cdots, T)$. 
 
-We denote $\mathbf{a}_t \overset{\Delta}{=} \big[ a_{1t} \, a_{2t} \, \cdots, a_{Tt}  \big]^\intercal$, $ \frac{\partial F}{\partial \mathbf{c}_t } \overset{\Delta}{=} \big[ \frac{\partial F}{\partial c_{1t}} \, \frac{\partial F}{\partial c_{2t}} \, \cdots \, \frac{\partial F}{\partial c_{Tt}} \big]^\intercal$, and $ \frac{\partial F}{\partial \mathbf{a}_t } \overset{\Delta}{=} \big[ \frac{\partial F}{\partial a_{1t}} \, \frac{\partial F}{\partial a_{2t}} \, \cdots \, \frac{\partial F}{\partial a_{Tt}} \big]^\intercal$. 
+We denote 
+
+$$
+\mathbf{a}_t \overset{\Delta}{=} \big[ a_{1t} \, a_{2t} \, \cdots, a_{Tt}  \big]^\intercal
+$$
+
+$$
+\frac{\partial F}{\partial \mathbf{c}_t } \overset{\Delta}{=} \big[ \frac{\partial F}{\partial c_{1t}} \, \frac{\partial F}{\partial c_{2t}} \, \cdots \, \frac{\partial F}{\partial c_{Tt}} \big]^\intercal
+$$ 
+
+$$
+\frac{\partial F}{\partial \mathbf{a}_t } \overset{\Delta}{=} \big[ \frac{\partial F}{\partial a_{1t}} \, \frac{\partial F}{\partial a_{2t}} \, \cdots \, \frac{\partial F}{\partial a_{Tt}} \big]^\intercal.
+$$
+
 According to Eq.(8.14) on page 180 in $[3]$, 
 for any $t=1,2,\cdots,T$,  we have
 
@@ -269,7 +283,13 @@ $$
 \bigg) \mathbf{X}^\intercal 
 $$
 
-Since we have $\mathbf{z}_t = \sum_{i=1}^T a_i(t) \mathbf{v}_i\;\; (\forall t = 1,2, \cdots, T)$, we compute
+Since we have 
+
+$$
+\mathbf{z}_t = \sum_{i=1}^T a_i(t) \mathbf{v}_i\;\; (\forall t = 1,2, \cdots, T)
+$$ 
+
+We compute
 
 $$
 \frac{\partial F}{ \partial \mathbf{v}_i} = \sum_{t=1}^T a_i(t) \frac{\partial F}{\partial \mathbf{z}_t} 
@@ -287,7 +307,7 @@ a_i(t)
 \mathcal{A}^\intercal
 $$
 
-Since we have $\mathbf{v}_i = \mathbf{C} \mathbf{x}_i \;\; (\forall i=1,2,\cdots,T)$, we compute 
+Since we have $\mathbf{v}_i = \mathbf{C} \mathbf{x}_i \;\; (\forall i=1,2,\cdots,T)$ , we compute 
 
 $$
 \frac{\partial F}{\partial \mathbf{C}} = \sum_{i=1}^T
@@ -370,7 +390,7 @@ where $\mathbf{W}_1 \in \mathbb{R}^{49152 \times 12288}$, and
 
 Based on these, we may calculate that  the total number of parameters in *GTP-3* is about $175$ billions.
 
-During training, a sequence of training vectors $ \{ \mathbf{x}_1, \mathbf{x}_2, \cdots, \mathbf{x}_{2048} \}$ is fed into *GPT-3* as input $\mathbf{X} \in \mathbb{R}^{12288\times 2048}$. For each time step $t=1,2,\cdots,2047$, *GPT-3* is trained to predict the token at position $t+1$ based on all vectors appearing up to position $t$, i.e., ${\mathbf{x}_1, \cdots, \mathbf{x}_t}$. 
+During training, a sequence of training vectors $\{ \mathbf{x}_1, \mathbf{x}_2, \cdots, \mathbf{x}_{2048} \}$ is fed into *GPT-3* as input $\mathbf{X} \in \mathbb{R}^{12288\times 2048}$. For each time step $t=1,2,\cdots,2047$, *GPT-3* is trained to predict the token at position $t+1$ based on all vectors appearing up to position $t$, i.e., ${\mathbf{x}_1, \cdots, \mathbf{x}_t}$. 
 Once trained, *GPT-3* can generate new sequences by feeding a sequence of vectors as a prompt. The model generates the probabilities of the next tokens based on the prompt, and then samples a new token accordingly. The sampled token is then added to the prompt to generate the next token. This process is repeated until a termination token is generated.
 
   ### **References**
