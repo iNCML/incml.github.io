@@ -307,6 +307,7 @@ a_{it}
 \;\; \bigg]^\intercal_{T \times T}
 = \bigg[ \;\; \frac{\partial F}{ \partial \mathbf{z}_i} \;\;\bigg]_{h \times T} 
 \mathcal{A}^\intercal
+= \mathbf{E} \mathcal{A}^\intercal
 $$
 
 Since we have $\mathbf{v}_i = \mathbf{C} \mathbf{x}_i \;\; (\forall i=1,2,\cdots,T)$ , we compute 
@@ -325,7 +326,7 @@ $$
 \frac{\partial F}{\partial \mathbf{C }} =  \mathbf{E} \mathcal{A}^\intercal  \mathbf{X}^\intercal
 $$
 
-Finally, we back-propagate the error signals from output to input. The input $\mathbf{X}$ affect the output through three different paths, i.e. $\mathbf{Q}$, $\mathbf{K}$ and $\mathbf{V}$. Therefore, we have
+Finally, we back-propagate the error signals from output to input. The input $\mathbf{X}$ affects the output through three different paths, i.e. $\mathbf{Q}$, $\mathbf{K}$ and $\mathbf{V}$. Therefore, we have
 
 $$
 \frac{\partial F}{\partial \mathbf{X}}
