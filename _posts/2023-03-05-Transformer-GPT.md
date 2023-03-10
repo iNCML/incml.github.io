@@ -410,7 +410,8 @@ $$
 $$ 
 
 is fed into *GPT-3* as input $\mathbf{X} \in \mathbb{R}^{12288\times 2048}$. For each time step $t=1,2,\cdots,2047$, *GPT-3* is trained to predict the token at position $t+1$ based on all vectors appearing up to position $t$, i.e., ${\mathbf{x}_1, \cdots, \mathbf{x}_t}$. 
-Once trained, *GPT-3* can generate new sequences by feeding a sequence of vectors as a prompt. The model generates the probabilities of the next tokens based on the prompt, and then samples a new token accordingly. The sampled token is then added to the prompt to generate the next token. This process is repeated until a termination token is generated.
+
+After its training, GPT-3 has the ability to create new sequences by using an input sequence as a prompt. To do this, the model calculates the probabilities of the possible next tokens that could follow the given prompt, and then selects a new token by randomly sampling from these probabilities. The selected token is then added to the end of the prompt, forming a new promp. This process continues until the model generates a termination token.
 
 ### **References**
 
