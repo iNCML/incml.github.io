@@ -211,6 +211,7 @@ $$
 
 where $\odot$ indicates element-wise multiplication of two vectors. 
 Next, we align the above results column by column for all $t=1,2,\cdots, T$  and use the  notation $\otimes$ to indicate the  batch of all $T$ above operations as follows: 
+
 $$
 \left[  \;\;\;\; \frac{\partial F}{\partial \mathbf{c}_t } \;\;\;\; \right]_{T \times T } =
 \mathcal{A} \otimes
