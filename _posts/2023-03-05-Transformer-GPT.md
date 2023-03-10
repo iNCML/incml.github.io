@@ -365,12 +365,16 @@ The authors of $[4]$ propose a deep multi-head transformer structure named *GPT-
 To begin, *GPT-3* employs a tokenizer to split any text sequence into a sequence of tokens (each token is a common word fragment). These tokens are then transformed into vectors of $d=12288$ dimensions using a word embedding matrix $\mathbf{W}_0 \in \mathbb{R}^{12288 \times 50257}$. Subsequently, the input sequence $\mathbf{X} \in \mathbb{R}^{12288 \times 2048}$ is transformed into $\mathbf{Y} \in \mathbb{R}^{12288 \times 2048}$ using 96 layers of multi-head transformer blocks. Each block is defined as follows:
 
 **(1)** Each multi-head transformer in *GPT-3* uses $96$ heads:
-$\mathbf{A}^{(j)}, \mathbf{B}^{(j)}, \mathbf{C}^{(j)} \in \mathbb{R}^{128 \times 12288} \;\;\; (j=1,2, \cdots, 96)$, which compute for all $j=1,2,\cdots,T$
+
+$$\mathbf{A}^{(j)}, \mathbf{B}^{(j)}, \mathbf{C}^{(j)} \in \mathbb{R}^{128 \times 12288} \;\;\; (j=1,2, \cdots, 96)
+$$
+
+which compute for all $j=1,2,\cdots,T$:
 
 $$
 \mathbf{Z}^{(j)} \in  \mathbb{R}^{ 128 \times 2048}
-    = \big( \mathbf{C}^{(j)} \mathbf{X} \big) \; \textrm{softmax}\Big( \big(\mathbf{A}^{(j)} \mathbf{X} \big)^\intercal  
-    \big( \mathbf{B}^{(j)} \mathbf{X} \big)/\sqrt{128}\Big) 
+= \big( \mathbf{C}^{(j)} \mathbf{X} \big) \; \textrm{softmax}\Big( \big(\mathbf{A}^{(j)} \mathbf{X} \big)^\intercal  
+\big( \mathbf{B}^{(j)} \mathbf{X} \big)/\sqrt{128}\Big) 
 $$
 
 **(2)** Concatenate the outputs from all heads:
