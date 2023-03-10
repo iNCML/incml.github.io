@@ -3,7 +3,7 @@ layout: post
 title: "Understanding Transformers and GPT: An In-depth Overview"
 date: 2023-03-05 
 ---
-*In this post, we delve into the technical details of the widely used transformer architecture by deriving all formulas involved in its forward and backward passes step by step. By doing so, we can implement these passes ourselves and often achieve more efficient performance than using autograd methods. Additionally, we introduce the construction of the popular GPT-3 model using the transformer architecture.*
+*In this post, we delve into the technical details of the widely used transformer architecture by deriving all formulas involved in its forward and backward passes step by step. By doing so, we can implement these passes ourselves and often achieve more efficient performance than using autograd methods. Additionally, we introduce the technical details on the construction of the popular GPT-3 model using the transformer architecture.*
 <br><br>
 
 Transformers $[1]$ are a type of neural network architecture designed to transform a sequence of $T$ input vectors, 
@@ -13,11 +13,11 @@ $$
  \;\;\;\;\;(\mathbf{x}_i \in \mathbb{R}^d, \; \forall i=1,2,\cdots,T),
  $$ 
 
-into an equal-length sequence of context-dependent output vectors:
+into an equal-length sequence of the so-called context-dependent output vectors:
 
 $$
  \{ \mathbf{y}_1, \mathbf{y}_2, \cdots, \mathbf{y}_T \}
- \;\;\;\;\;(\mathbf{y}_i \in \mathbb{R}^o, \; \forall i=1,2,\cdots,T).
+ \;\;\;\;\;(\mathbf{y}_i \in \mathbb{R}^h, \; \forall i=1,2,\cdots,T).
 $$ 
 
 The output sequence in a transformer model is referred to as *context-dependent* because each output vector is influenced not only by the corresponding input vector but also by the context of the entire input sequence. Specifically, each output vector $\mathbf{y}_i$ depends on all input vectors in the sequence, not just $\mathbf{x}_i$ at the same position. As a result, each output vector can be viewed as a representation of not only the input vector at the same location but also its contextual information in the entire sequence.
@@ -26,14 +26,14 @@ More importantly, transformers utilize a flexible attention mechanism that enabl
 
 ### **Transformers: Forward Pass**
 
-Let's pack all input vectors as a $d \times T$ matrix, and all output vectors as an $o \times T$ matrix, as follows:
+Let's pack all input vectors as a $d \times T$ matrix, and all output vectors as an $l  \times T$ matrix, as follows:
 
 $$
 \mathbf{X} = \bigg[ \mathbf{x}_1 \; \mathbf{x}_2 \; \cdots \; \mathbf{x}_T  \bigg]_{d \times T}
 $$
 
 $$
-\mathbf{Y} = \bigg[ \mathbf{y}_1 \; \mathbf{y}_2 \; \cdots \; \mathbf{y}_T  \bigg]_{o \times T}
+\mathbf{Y} = \bigg[ \mathbf{y}_1 \; \mathbf{y}_2 \; \cdots \; \mathbf{y}_T  \bigg]_{h \times T}
 $$
 
 In this way, a transformer can be viewed as a function $\cal{T}$ that maps from $\mathbf{X}$ to $\mathbf{Y}$:
@@ -44,7 +44,7 @@ $$
 
 In the following, we will investigate all steps in the above mapping in a transformer. 
 
-- **Forward step 1:** we first introduce three parameter matrices $\mathbf{A}, \mathbf{B}, \mathbf{C} \in \mathbb{R}^{h \times d}$, which transform each input vector $\mathbf{x}_i$ to generate the so-called *query* vector $\mathbf{q}_i$, *key* vector $\mathbf{k}_i$ and *value* vector $\mathbf{v}_i$:
+- **Forward step 1:** we first introduce three parameter matrices $\mathbf{A}, \mathbf{B}, \mathbf{C} \in \mathbb{R}^{h  \times d}$, which transform each input vector $\mathbf{x}_i$ to generate the so-called *query* vector $\mathbf{q}_i$, *key* vector $\mathbf{k}_i$, and *value* vector $\mathbf{v}_i$:
 
 $$
 \mathbf{q}_i = \mathbf{A} \mathbf{x}_i, \;
@@ -54,7 +54,7 @@ $$
 
 When the *query*, *key*, and *value* vectors are all derived from a common input source, we refer to the transformer's mechanism as performing *self-attention*. Conversely, if these vectors are derived from different sources, the mechanism is called *cross-attention*.
 
-The above operations can be combined into three matrix multiplications:
+The above operations can be combined as three matrix multiplications in the following:
 
 $$
 \mathbf{Q} = \mathbf{A} \mathbf{X}, \;\;
@@ -67,7 +67,7 @@ where $\mathbf{Q}, \mathbf{K}, \mathbf{V} \in \mathbb{R}^{h \times T}$ are const
 - **Forward step 2:** use the above *query* and *key* vectors to compute all pair-wise attention between any two input vectors $\mathbf{x}_i$ and $\mathbf{x}_t$ ($\forall i,t =1,2, \cdots, T$) as follows:
 
 $$ 
-c_{it} = \frac{\mathbf{q}_i^\intercal \mathbf{k}_t}{\sqrt{h}} \;\;\;\;\;\;\;\;
+c_{it} = \frac{\mathbf{q}_i^\intercal \mathbf{k}_t}{\sqrt{o}} \;\;\;\;\;\;\;\;
 (\forall i,t =1,2, \cdots, T)
 $$
 
@@ -149,7 +149,7 @@ Arrange them column by column as a matrix:
 
 $$
 \mathbf{E} = \frac{\partial F}{\partial \mathbf{Z}}
-= \left[ \;\; \frac{\partial F}{ \partial \mathbf{z}_t} \;\; \right]_{o \times T}
+= \left[ \;\; \frac{\partial F}{ \partial \mathbf{z}_t} \;\; \right]_{h \times T}
 $$
 
 Let's break down all attention operations in a transformer in Figure 1 step by step backwards from the output towards input as follows:
@@ -173,8 +173,8 @@ Align all of these ($T^2$ terms in total) as a $T \times T$ matrix:
 
 $$
 \left[  \;\; \frac{\partial F}{\partial a_i(t)} \;\; \right]_{T \times T } = \bigg[ \;\;
-\mathbf{V}^\intercal \;\; \bigg]_{T\times o }
-\bigg[ \;\; \mathbf{E} \;\; \bigg]_{o \times T }
+\mathbf{V}^\intercal \;\; \bigg]_{T\times h }
+\bigg[ \;\; \mathbf{E} \;\; \bigg]_{h \times T }
 $$
 
 - **Backward step 2:** we normalize as $a_i(t) = \frac{e^{c_i(t)}}{\sum_{j=1}^T e^{c_j(t)}} \;\;\;\;\;\; (\forall i,t = 1,2, \cdots, T)$. 
@@ -235,9 +235,9 @@ $$
 Align these vectors column by column as the following matrix format:
 
 $$
-\bigg[ \;\; \frac{\partial F}{ \partial \mathbf{q}_i} \;\; \bigg]_{l \times T}
-= \frac{1}{\sqrt{h}} \bigg[ \;\; \mathbf{K} \;\; \bigg]_{l  \times T}
-\left[  \;\; \frac{\partial F}{\partial c_i(t)} \;\; \right]_{T \times T }
+\bigg[ \;\; \frac{\partial F}{ \partial \mathbf{q}_i} \;\; \bigg]_{h \times T}
+= \frac{1}{\sqrt{h}} \bigg[ \;\; \mathbf{K} \;\; \bigg]_{h  \times T}
+\left[  \;\; \frac{\partial F}{\partial c_i(t)} \;\; \right]^\intercal_{T \times T }
 $$
 
 - **Backward step 4:** because of $\mathbf{q}_i = \mathbf{\mathbf{A}} \mathbf{x}_i$, we have 
@@ -246,22 +246,22 @@ $$
 \frac{\partial F}{\partial \mathbf{A}} = \sum_{i=1}^T
 \frac{\partial F}{\partial \mathbf{q}_i} \frac{\partial \mathbf{q}_i}{\partial \mathbf{A}}
 = \frac{1}{\sqrt{h}}\sum_{i=1}^T \frac{\partial F}{\partial \mathbf{q}_i} \mathbf{x}_i^\intercal 
-= \frac{1}{\sqrt{h}}\bigg[ \;\; \frac{\partial F}{ \partial \mathbf{q}_i} \;\; \bigg]_{l \times T} 
+= \frac{1}{\sqrt{h}}\bigg[ \;\; \frac{\partial F}{ \partial \mathbf{q}_i} \;\; \bigg]_{h \times T} 
 \bigg[ \;\; \mathbf{X}^\intercal \;\; \bigg]_{T\times d}
 $$
 
 Putting all the above steps together, we have
 
 $$
-\frac{\partial F}{\partial \mathbf{A}} =  \frac{1}{\sqrt{h}}\bigg[ \;\; \mathbf{K} \;\; \bigg]_{l  \times T}
+\frac{\partial F}{\partial \mathbf{A}} =  \frac{1}{\sqrt{h}}\bigg[ \;\; \mathbf{K} \;\; \bigg]_{h  \times T}
 \Bigg(
 \mathcal{A} \otimes
 \Bigg(
 \bigg[ \;\;
-\mathbf{V}^\intercal \;\; \bigg]_{T\times o }
-\bigg[ \;\; \mathbf{E} \;\; \bigg]_{o \times T }
+\mathbf{V}^\intercal \;\; \bigg]_{T\times h }
+\bigg[ \;\; \mathbf{E} \;\; \bigg]_{h \times T }
 \Bigg)
-\Bigg)
+\Bigg)^\intercal 
 \bigg[ \;\; \mathbf{X}^\intercal \;\; \bigg]_{T\times d}
 $$
 
@@ -271,7 +271,7 @@ $$
 \big( 
 \mathbf{V}^\intercal \mathbf{E}
 \big)
-\bigg) \mathbf{X}^\intercal 
+\bigg)^\intercal  \mathbf{X}^\intercal 
 $$
 
 Similarly, we can derive 
@@ -301,12 +301,12 @@ $$
 Arrange them column by column into a matrix
 
 $$
-\bigg[ \;\; \frac{\partial F}{ \partial \mathbf{v}_i} \;\;\bigg]_{o \times T}
-= \bigg[ \;\; \frac{\partial F}{ \partial \mathbf{z}_i} \;\;\bigg]_{o \times T}
+\bigg[ \;\; \frac{\partial F}{ \partial \mathbf{v}_i} \;\;\bigg]_{h \times T}
+= \bigg[ \;\; \frac{\partial F}{ \partial \mathbf{z}_i} \;\;\bigg]_{h \times T}
 \bigg[ \;\;
 a_i(t)
 \;\; \bigg]^\intercal_{T \times T}
-= \bigg[ \;\; \frac{\partial F}{ \partial \mathbf{z}_i} \;\;\bigg]_{o \times T} 
+= \bigg[ \;\; \frac{\partial F}{ \partial \mathbf{z}_i} \;\;\bigg]_{h \times T} 
 \mathcal{A}^\intercal
 $$
 
@@ -316,7 +316,7 @@ $$
 \frac{\partial F}{\partial \mathbf{C}} = \sum_{i=1}^T
 \frac{\partial F}{\partial \mathbf{v}_i} \frac{\partial \mathbf{v}_i}{\partial \mathbf{C}}
 = \sum_{i=1}^T \frac{\partial F}{\partial \mathbf{v}_i} \mathbf{x}_i^\intercal 
-= \bigg[ \;\; \frac{\partial F}{ \partial \mathbf{v}_i} \;\; \bigg]_{l \times T} 
+= \bigg[ \;\; \frac{\partial F}{ \partial \mathbf{v}_i} \;\; \bigg]_{h \times T} 
 \bigg[ \;\; \mathbf{X}^\intercal \;\; \bigg]_{T\times d}
 $$
 
@@ -336,25 +336,31 @@ $$
 $$
 
 $$
-= \bigg[ \;\; \mathbf{A}^\intercal \;\; \bigg]_{d\times l}
-\bigg[ \;\; \frac{\partial F}{ \partial \mathbf{q}_i} \;\; \bigg]_{l \times T} 
-+ \bigg[ \;\; \mathbf{B}^\intercal \;\; \bigg]_{d\times l}
-\bigg[ \;\; \frac{\partial F}{ \partial \mathbf{k}_i} \;\; \bigg]_{l \times T} 
-+ \bigg[ \;\; \mathbf{C}^\intercal \;\; \bigg]_{d\times l}\bigg[ \;\; \frac{\partial F}{ \partial \mathbf{v}_i} \;\; \bigg]_{l \times T}
+= \bigg[ \;\; \mathbf{A}^\intercal \;\; \bigg]_{d\times h}
+\bigg[ \;\; \frac{\partial F}{ \partial \mathbf{q}_i} \;\; \bigg]_{h \times T} 
++ \bigg[ \;\; \mathbf{B}^\intercal \;\; \bigg]_{d\times h}
+\bigg[ \;\; \frac{\partial F}{ \partial \mathbf{k}_i} \;\; \bigg]_{h \times T} 
++ \bigg[ \;\; \mathbf{C}^\intercal \;\; \bigg]_{d\times l}\bigg[ \;\; \frac{\partial F}{ \partial \mathbf{v}_i} \;\; \bigg]_{h \times T}
 $$
 
 $$
-= \frac{1}{\sqrt{h}}  \bigg( \mathbf{A}^\intercal \mathbf{K} + \mathbf{B}^\intercal \mathbf{Q} \bigg)
-\bigg( \mathcal{A} \otimes
+= \frac{1}{\sqrt{h}}  \bigg( \mathbf{A}^\intercal \mathbf{K} 
+\Big( \mathcal{A} \otimes
 \big( 
 \mathbf{V}^\intercal \mathbf{E}
-\big) \bigg) 
+\big) \Big)^\intercal
++ \mathbf{B}^\intercal \mathbf{Q} 
+\Big( \mathcal{A} \otimes
+\big( 
+\mathbf{V}^\intercal \mathbf{E}
+\big) \Big) 
+\bigg)
 + \mathbf{C}^\intercal \mathbf{E} \mathcal{A}^\intercal
 $$
 
 ### **GPT-3**
 
-The authors of $[4]$ propose a deep multi-head transformer structure named *GPT-3* for processing text data. In GPT-3, the values of $d$, $o$, and $T$ are set to $d=12288$, $o=128$, and $T=2048$, respectively, while the vocabulary is composed of $50257$ distinct tokens.
+The authors of $[4]$ propose a deep multi-head transformer structure named *GPT-3* for processing text data. In GPT-3, the values of $d$, $h$, and $T$ are set to $d=12288$, $h=128$, and $T=2048$, respectively, while the vocabulary is composed of $50257$ distinct tokens.
 
 To begin, *GPT-3* employs a tokenizer to split any text sequence into a sequence of tokens (each token is a common word fragment). These tokens are then transformed into vectors of $d=12288$ dimensions using a word embedding matrix $\mathbf{W}_0 \in \mathbb{R}^{12288 \times 50257}$. Subsequently, the input sequence $\mathbf{X} \in \mathbb{R}^{12288 \times 2048}$ is transformed into $\mathbf{Y} \in \mathbb{R}^{12288 \times 2048}$ using 96 layers of multi-head transformer blocks. Each block is defined as follows:
 
