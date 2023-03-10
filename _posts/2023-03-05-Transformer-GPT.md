@@ -67,7 +67,7 @@ where $\mathbf{Q}, \mathbf{K}, \mathbf{V} \in \mathbb{R}^{h \times T}$ are const
 - **Forward step 2:** use the above *query* and *key* vectors to compute all pair-wise attention between any two input vectors $\mathbf{x}_i$ and $\mathbf{x}_t$ ($\forall i,t =1,2, \cdots, T$) as follows:
 
 $$ 
-c_{it} = \frac{\mathbf{q}_i^\intercal \mathbf{k}_t}{\sqrt{o}} \;\;\;\;\;\;\;\;
+c_{it} = \frac{\mathbf{q}_i^\intercal \mathbf{k}_t}{\sqrt{h}} \;\;\;\;\;\;\;\;
 (\forall i,t =1,2, \cdots, T)
 $$
 
@@ -157,14 +157,14 @@ Let's break down all attention operations in a transformer in Figure 1 step by s
 - **Backward step 1:** we have 
 
 $$
-\mathbf{z}_t = \sum_{i=1}^T a_i(t) \mathbf{v}_i\;\;\;\;\;\;\;\;\;\; (\forall t = 1,2, \cdots, T)
+\mathbf{z}_t = \sum_{i=1}^T a_{it} \, \mathbf{v}_i\;\;\;\;\;\;\;\;\;\; (\forall t = 1,2, \cdots, T)
 $$
 
 According to the chain rule, we can compute
 
 $$
-\frac{\partial F}{\partial a_i(t) }
-=  \frac{\partial F}{\partial \mathbf{z}_t } \frac{\partial \mathbf{z}_t}{ \partial a_i(t)}
+\frac{\partial F}{\partial a_{it} }
+=  \frac{\partial F}{\partial \mathbf{z}_t } \frac{\partial \mathbf{z}_t}{ \partial a_{it}}
 = \mathbf{v}_i^\intercal \frac{\partial F}{\partial \mathbf{z}_t } 
 \;\;\;\;\;(\forall i,t=1,2,\cdots,T)
 $$
@@ -172,12 +172,12 @@ $$
 Align all of these ($T^2$ terms in total) as a $T \times T$ matrix:
 
 $$
-\left[  \;\; \frac{\partial F}{\partial a_i(t)} \;\; \right]_{T \times T } = \bigg[ \;\;
+\left[  \;\; \frac{\partial F}{\partial a_{it}} \;\; \right]_{T \times T } = \bigg[ \;\;
 \mathbf{V}^\intercal \;\; \bigg]_{T\times h }
 \bigg[ \;\; \mathbf{E} \;\; \bigg]_{h \times T }
 $$
 
-- **Backward step 2:** we normalize as $a_i(t) = \frac{e^{c_i(t)}}{\sum_{j=1}^T e^{c_j(t)}} \;\;\;\;\;\; (\forall i,t = 1,2, \cdots, T)$. 
+- **Backward step 2:** we normalize as $a_{it} = \frac{e^{c_{i}t}}{\sum_{j=1}^T e^{c_{jt}}} \;\;\;\;\;\; (\forall i,t = 1,2, \cdots, T)$. 
 
 We denote 
 
@@ -214,21 +214,21 @@ where $\odot$ indicates element-wise multiplication of two vectors.
 Next, we align the above results column by column for all $t=1,2,\cdots, T$  and use the  notation $\otimes$ to indicate the  batch of all $T$ above operations as follows: 
 
 $$
-    \left[  \;\; \frac{\partial F}{\partial c_i(t)} \;\; \right]_{T \times T } =
+    \left[  \;\; \frac{\partial F}{\partial c_{it}} \;\; \right]_{T \times T } =
     \mathcal{A} \otimes
-    \left[  \;\; \frac{\partial F}{\partial a_i(t)} \;\; \right]_{T \times T } 
+    \left[  \;\; \frac{\partial F}{\partial a_{it}} \;\; \right]_{T \times T } 
 $$
 
 It is worth noting that the aforementioned backward implementation can be applied directly to *causal attention* without any modifications.
 
-- **Backward step 3:** due to $c_i(t) = \mathbf{q}_i^\intercal \mathbf{k}_t/\sqrt{h} \;\;\;\;\;\; (\forall i,t = 1,2,\cdots, T)$, we have 
+- **Backward step 3:** due to $c_{it} = \mathbf{q}_i^\intercal \mathbf{k}_t/\sqrt{h} \;\;\;\;\;\; (\forall i,t = 1,2,\cdots, T)$, we have 
 
 $$
 \frac{\partial F}{ \partial \mathbf{q}_i}  = \sum_{t=1}^T  
-\frac{\partial F}{\partial c_i(t) }
-\frac{\partial c_i(t)}{\partial \mathbf{q}_i} =
+\frac{\partial F}{\partial c_{it} }
+\frac{\partial c_{it}}{\partial \mathbf{q}_i} =
 \frac{1}{\sqrt{h}}\sum_{t=1}^T  
-\frac{\partial F}{\partial c_i(t) }
+\frac{\partial F}{\partial c_{it} }
 \mathbf{k}_t
 $$
 
@@ -237,7 +237,7 @@ Align these vectors column by column as the following matrix format:
 $$
 \bigg[ \;\; \frac{\partial F}{ \partial \mathbf{q}_i} \;\; \bigg]_{h \times T}
 = \frac{1}{\sqrt{h}} \bigg[ \;\; \mathbf{K} \;\; \bigg]_{h  \times T}
-\left[  \;\; \frac{\partial F}{\partial c_i(t)} \;\; \right]^\intercal_{T \times T }
+\left[  \;\; \frac{\partial F}{\partial c_{it}} \;\; \right]^\intercal_{T \times T }
 $$
 
 - **Backward step 4:** because of $\mathbf{q}_i = \mathbf{\mathbf{A}} \mathbf{x}_i$, we have 
@@ -289,13 +289,13 @@ $$
 Since we have 
 
 $$
-\mathbf{z}_t = \sum_{i=1}^T a_i(t) \mathbf{v}_i\;\; (\forall t = 1,2, \cdots, T)
+\mathbf{z}_t = \sum_{i=1}^T a_{it} \mathbf{v}_i\;\; (\forall t = 1,2, \cdots, T)
 $$ 
 
 We compute
 
 $$
-\frac{\partial F}{ \partial \mathbf{v}_i} = \sum_{t=1}^T a_i(t) \frac{\partial F}{\partial \mathbf{z}_t} 
+\frac{\partial F}{ \partial \mathbf{v}_i} = \sum_{t=1}^T a_{it} \frac{\partial F}{\partial \mathbf{z}_t} 
 $$
 
 Arrange them column by column into a matrix
@@ -304,7 +304,7 @@ $$
 \bigg[ \;\; \frac{\partial F}{ \partial \mathbf{v}_i} \;\;\bigg]_{h \times T}
 = \bigg[ \;\; \frac{\partial F}{ \partial \mathbf{z}_i} \;\;\bigg]_{h \times T}
 \bigg[ \;\;
-a_i(t)
+a_{it}
 \;\; \bigg]^\intercal_{T \times T}
 = \bigg[ \;\; \frac{\partial F}{ \partial \mathbf{z}_i} \;\;\bigg]_{h \times T} 
 \mathcal{A}^\intercal
