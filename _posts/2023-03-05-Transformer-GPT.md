@@ -244,8 +244,8 @@ $$
 $$
 \frac{\partial F}{\partial \mathbf{A}} = \sum_{i=1}^T
 \frac{\partial F}{\partial \mathbf{q}_i} \frac{\partial \mathbf{q}_i}{\partial \mathbf{A}}
-= \frac{1}{\sqrt{h}}\sum_{i=1}^T \frac{\partial F}{\partial \mathbf{q}_i} \mathbf{x}_i^\intercal 
-= \frac{1}{\sqrt{h}}\bigg[ \;\; \frac{\partial F}{ \partial \mathbf{q}_i} \;\; \bigg]_{h \times T} 
+= \sum_{i=1}^T \frac{\partial F}{\partial \mathbf{q}_i} \mathbf{x}_i^\intercal 
+= \bigg[ \;\; \frac{\partial F}{ \partial \mathbf{q}_i} \;\; \bigg]_{h \times T} 
 \bigg[ \;\; \mathbf{X}^\intercal \;\; \bigg]_{T\times d}
 $$
 
