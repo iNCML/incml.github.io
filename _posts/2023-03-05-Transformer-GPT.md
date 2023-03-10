@@ -183,14 +183,13 @@ We denote
 
 $$
 \mathbf{a}_t \overset{\Delta}{=} \big[ a_{1t} \, a_{2t} \, \cdots, a_{Tt}  \big]^\intercal
+\;\;\;\;\; \textrm{and} \;\;\;\; \mathbf{c}_t \overset{\Delta}{=} \big[ c_{1t} \, c_{2t} \, \cdots, c_{Tt}  \big]^\intercal
 $$
 
 $$
+\frac{\partial F}{\partial \mathbf{a}_t } \overset{\Delta}{=} \big[ \frac{\partial F}{\partial a_{1t}} \, \frac{\partial F}{\partial a_{2t}} \, \cdots \, \frac{\partial F}{\partial a_{Tt}} \big]^\intercal
+\;\;\;\;\; \textrm{and} \;\;\;\; 
 \frac{\partial F}{\partial \mathbf{c}_t } \overset{\Delta}{=} \big[ \frac{\partial F}{\partial c_{1t}} \, \frac{\partial F}{\partial c_{2t}} \, \cdots \, \frac{\partial F}{\partial c_{Tt}} \big]^\intercal
-$$ 
-
-$$
-\frac{\partial F}{\partial \mathbf{a}_t } \overset{\Delta}{=} \big[ \frac{\partial F}{\partial a_{1t}} \, \frac{\partial F}{\partial a_{2t}} \, \cdots \, \frac{\partial F}{\partial a_{Tt}} \big]^\intercal.
 $$
 
 According to Eq.(8.14) on page 180 in $[3]$, 
@@ -212,11 +211,10 @@ $$
 
 where $\odot$ indicates element-wise multiplication of two vectors. 
 Next, we align the above results column by column for all $t=1,2,\cdots, T$  and use the  notation $\otimes$ to indicate the  batch of all $T$ above operations as follows: 
-
 $$
-    \left[  \;\; \frac{\partial F}{\partial c_{it}} \;\; \right]_{T \times T } =
-    \mathcal{A} \otimes
-    \left[  \;\; \frac{\partial F}{\partial a_{it}} \;\; \right]_{T \times T } 
+\left[  \;\;\;\; \frac{\partial F}{\partial \mathbf{c}_t } \;\;\;\; \right]_{T \times T } =
+\mathcal{A} \otimes
+\left[  \;\;\;\; \frac{\partial F}{\partial \mathbf{a}_t} \;\;\;\; \right]_{T \times T } 
 $$
 
 It is worth noting that the aforementioned backward implementation can be applied directly to *causal attention* without any modifications.
@@ -237,7 +235,7 @@ Align these vectors column by column as the following matrix format:
 $$
 \bigg[ \;\; \frac{\partial F}{ \partial \mathbf{q}_i} \;\; \bigg]_{h \times T}
 = \frac{1}{\sqrt{h}} \bigg[ \;\; \mathbf{K} \;\; \bigg]_{h  \times T}
-\left[  \;\; \frac{\partial F}{\partial c_{it}} \;\; \right]^\intercal_{T \times T }
+\left[  \;\; \frac{\partial F}{\partial \mathbf{c}_t } \;\; \right]^\intercal_{T \times T }
 $$
 
 - **Backward step 4:** because of $\mathbf{q}_i = \mathbf{\mathbf{A}} \mathbf{x}_i$, we have 
