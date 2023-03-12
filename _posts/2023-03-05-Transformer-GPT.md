@@ -358,6 +358,42 @@ $$
 + \mathbf{C}^\intercal \mathbf{E} \mathcal{A}^\intercal
 $$
 
+Finally, we summarize the above results using a more compact matrix representation. If we define the following $3h \times T$ matrix:
+$$
+\mathbf{P} \overset{\Delta}{=}  \begin{bmatrix}
+\frac{1}{\sqrt{h}} \mathbf{K} \bigg( 
+\mathcal{A}  \otimes
+\big( \mathbf{V}^\intercal \mathbf{E} \big) \bigg)^\intercal \\
+\frac{1}{\sqrt{h}} \mathbf{Q} \bigg( 
+\mathcal{A}  \otimes
+\big( \mathbf{V}^\intercal \mathbf{E} \big) \bigg) \\
+\mathbf{E} \mathcal{A}^\intercal 
+\end{bmatrix}_{ 3h \times T}
+$$
+we have
+$$
+\begin{bmatrix}
+ \frac{\partial F}{\partial \mathbf{A}} \\[0.2cm]
+ \frac{\partial F}{\partial \mathbf{B}} \\[0.2cm]
+  \frac{\partial F}{\partial \mathbf{C}} 
+\end{bmatrix} = 
+\mathbf{P} \, \mathbf{X}^\intercal \;\;\;\;\;\;\Big(\in  \mathbb{R}^{3h \times d} \Big) 
+$$
+
+$$
+\frac{\partial F}{\partial \mathbf{X}}  = 
+\begin{bmatrix}
+ \mathbf{A} \\
+  \mathbf{B} \\
+  \mathbf{C}
+\end{bmatrix}^\intercal
+\, \mathbf{P}
+= \Big[ \mathbf{A}^\intercal \;\; \mathbf{B}^\intercal 
+\;\; \mathbf{C}^\intercal
+\Big] \, \mathbf{P}
+\;\;\;\;\;\;\Big(\in \mathbb{R}^{d \times T} \Big) 
+$$
+
 ### **GPT-3**
 
 The authors of $[4]$ propose a deep multi-head transformer structure named *GPT-3* for processing text data. In GPT-3, the values of $d$, $h$, and $T$ are set to $d=12288$, $h=128$, and $T=2048$, respectively, while the vocabulary is composed of $50257$ distinct tokens.
