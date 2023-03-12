@@ -376,8 +376,8 @@ we have
 
 $$
 \begin{bmatrix}
- \frac{\partial F}{\partial \mathbf{A}} \\[0.2cm]
- \frac{\partial F}{\partial \mathbf{B}} \\[0.2cm]
+ \frac{\partial F}{\partial \mathbf{A}} \\[0.1cm]
+ \frac{\partial F}{\partial \mathbf{B}} \\[0.1cm]
   \frac{\partial F}{\partial \mathbf{C}} 
 \end{bmatrix} = 
 \mathbf{P} \, \mathbf{X}^\intercal \;\;\;\;\;\;\Big(\in  \mathbb{R}^{3h \times d} \Big) 
