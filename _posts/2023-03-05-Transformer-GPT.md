@@ -359,6 +359,7 @@ $$
 $$
 
 Finally, we summarize the above results using a more compact matrix representation. If we define the following $3h \times T$ matrix:
+
 $$
 \mathbf{P} \overset{\Delta}{=}  \begin{bmatrix}
 \frac{1}{\sqrt{h}} \mathbf{K} \bigg( 
@@ -370,7 +371,9 @@ $$
 \mathbf{E} \mathcal{A}^\intercal 
 \end{bmatrix}_{ 3h \times T}
 $$
+
 we have
+
 $$
 \begin{bmatrix}
  \frac{\partial F}{\partial \mathbf{A}} \\[0.2cm]
