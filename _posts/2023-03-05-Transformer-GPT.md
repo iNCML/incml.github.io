@@ -397,6 +397,8 @@ $$
 \;\;\;\;\;\;\Big(\in \mathbb{R}^{d \times T} \Big) 
 $$
 
+*Note: Refer to [a pytorch implementation at Colab](https://colab.research.google.com/drive/1-op--04cwJI2L8iPNIgNoPsJ3uPke8OB?usp=sharing) and its comparison with pytorch autograd.*
+
 ### **GPT-3**
 
 The authors of $[4]$ propose a deep multi-head transformer structure named *GPT-3* for processing text data. In GPT-3, the values of $d$, $h$, and $T$ are set to $d=12288$, $h=128$, and $T=2048$, respectively, while the vocabulary is composed of $50257$ distinct tokens.
