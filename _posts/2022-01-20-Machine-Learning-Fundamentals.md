@@ -37,7 +37,7 @@ This post provides complementary materials for my recent textbook [**Machine Lea
 - **Lab 4**: [Support Vector Machines](https://github.com/iNCML/MachineLearningBook/blob/master/labs/pdf/Lab4_Support_Vector_Machine.pdf) (available at [Colab](https://colab.research.google.com/drive/1vlN46Xhfv4ES8jFWWI0iTj3WHKjb0KMg?usp=sharing), [ipynb](https://github.com/iNCML/MachineLearningBook/blob/master/labs/ipynb/Lab4_Support_Vector_Machine.ipynb))
 - **Lab 5**: [Fully-Connected Neural Networks](https://github.com/iNCML/MachineLearningBook/blob/master/labs/pdf/Lab5_Fully_Connected_Neural_Networks.pdf) (available at [Colab](https://colab.research.google.com/drive/1TY3fAAS18lyGrlEsvLhaYm6fIBP7CDgD?usp=sharing), [ipynb](https://github.com/iNCML/MachineLearningBook/blob/master/labs/ipynb/Lab5_Fully_Connected_Neural_Networks.ipynb))
 - **Lab 6**: [Convolutional Neural Networks](https://github.com/iNCML/MachineLearningBook/blob/master/labs/pdf/Lab6_Convolutional_Neural_Networks.pdf)  (available at [Colab](https://colab.research.google.com/drive/1Zkeujeoh4jNR9bQ67kfuIE7cV6KifZS2?usp=sharing), [ipynb](https://github.com/iNCML/MachineLearningBook/blob/master/labs/ipynb/Lab6_Convolutional_Neural_Networks.ipynb))
-- **Lab 7**: Recurrent Neural Networks and Transformers 
+- **Lab 7**: [Transformers](https://github.com/iNCML/MachineLearningBook/blob/master/labs/pdf/Lab7_Transformers.pdf) (available at [Colab](https://colab.research.google.com/drive/1RvaBdX-KrgCNkVoo39UYqH1qzd-hAT5q), [ipynb](https://github.com/iNCML/MachineLearningBook/blob/master/labs/ipynb/Lab7_Transformers.ipynb)) 
 - **Lab 8**: Matrix Factorization 
 - **Lab 9**: Decision Trees, Random Forests and Boosted Trees 
 - **Lab 10**: Gaussian Classifiers and Gaussian Mixture Models 
