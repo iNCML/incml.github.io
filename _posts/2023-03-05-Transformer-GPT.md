@@ -397,7 +397,7 @@ $$
 \;\;\;\;\;\;\Big(\in \mathbb{R}^{d \times T} \Big) 
 $$
 
-*Note: Refer to [a pytorch implementation at Colab](https://colab.research.google.com/drive/1-op--04cwJI2L8iPNIgNoPsJ3uPke8OB?usp=sharing) and its comparison with pytorch autograd.*
+*Note: Refer to [a pytorch implementation at Colab](https://colab.research.google.com/drive/1-op--04cwJI2L8iPNIgNoPsJ3uPke8OB) and its comparison with pytorch autograd (or a [JAX implementation at Colab](https://colab.research.google.com/drive/1WOdo0AuSn-lIzOxXLxTwDAKPJhzEvJ2e)).*
 
 ### **GPT-3**
 
