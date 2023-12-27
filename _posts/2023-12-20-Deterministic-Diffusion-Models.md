@@ -104,7 +104,7 @@ $$
 \mathbf{\hat x}_0 = f^{-1}_{\boldsymbol \theta} (\mathbf{x}_t, t)
 $$
 
-which can recover a rough estimate of the clean image $\hat{\mathbf{x}}_0$ from $\mathbf{x}_t$.
+which can recover a rough estimate of the clean image $\hat{\mathbf{x}}_0$ from $\mathbf{x}_t$ (along the right-to-left red dash arrow in Figure 1).
 In this case, this neural network is learned by minimizing the following objective function:
 
 $$\begin{aligned}
