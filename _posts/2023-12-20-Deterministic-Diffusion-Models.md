@@ -93,7 +93,8 @@ we gradually recover all corrupted images backwards one by one until we obtain t
 
 $$\mathbf{x}_T \to \mathbf{x}_{T-1} \to \mathbf{x}_{T-2} \to  \cdots \to \mathbf{x}_1 \to \mathbf{x}_0$$
 
-At each timestep, given the corrupted image ${\mathbf x}_t$, 
+At each timestep, given the corrupted image 
+$x_t$, 
 in order to denoise to recover a slightly cleaner version of the image $x_{t-1}$, we have two choices:
 
 #### **I. Estimating clean image $\mathbf{x}_0$**
