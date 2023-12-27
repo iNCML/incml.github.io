@@ -50,7 +50,10 @@ $$
 \big[ \mathbf{x}_t - \sqrt{1 - \bar{\alpha}_t}\,   {\boldsymbol \epsilon} \big]
 $$
 
-and substitute  $ \mathbf{x}_0 $
+and substitute  
+
+$ \mathbf{x}_0 $
+
 to further derive the relationship between any two adjacent samples, i.e.  $ \mathbf{x}_t $
 and $ \mathbf{x}_{t-1} $ , 
 as follows:
@@ -124,14 +127,14 @@ $$\begin{aligned}
 
 At last, the sampling process to generate a new image can be described as follows:
 
-1. sample a Gaussian noise $\mathbf{x}_T \sim \mathcal{N}(0, \mathbf{I}) $
-2. for $t=T, T-1, \cdots, 1$:
- * 2.1) if $t>1$, sample another noise $\mathbf{z} \sim \mathcal{N}(0, \mathbf{I})$, else $\mathbf{z}=0$
- * 2.2) denoise:
+* sample a Gaussian noise $\mathbf{x}_T \sim \mathcal{N}(0, \mathbf{I}) $
+* for $t=T, T-1, \cdots, 1$:
+  * if $t>1$, sample another noise $\mathbf{z} \sim \mathcal{N}(0, \mathbf{I})$, else $\mathbf{z}=0$
+  * denoise:
  
  $$\mathbf{x}_{t-1} = \mathbf{x}_t + \frac{\sqrt{\bar{\alpha}_{t-1}} (1- \alpha_t)}{2} f^{-1}_{\boldsymbol \theta} (\mathbf{x}_t, t) + \sigma_t  \mathbf{z}$$
 
-3. return $\mathbf{x}_0$
+* return $\mathbf{x}_0$
 
 #### **Estimating noise ${\boldsymbol \epsilon}$**
 
