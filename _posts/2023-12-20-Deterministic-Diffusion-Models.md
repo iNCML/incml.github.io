@@ -50,8 +50,7 @@ $$
 \big[ \mathbf{x}_t - \sqrt{1 - \bar{\alpha}_t}\,   {\boldsymbol \epsilon} \big]
 $$
 
-and substitute $\mathbf{x}_0$
-to further derive the relationship between any two adjacent samples, i.e.  $ \mathbf{x}_t $
+and further derive the relationship between any two adjacent samples, i.e.  $ \mathbf{x}_t $
 and $ \mathbf{x}_{t-1} $ , 
 as follows:
 
