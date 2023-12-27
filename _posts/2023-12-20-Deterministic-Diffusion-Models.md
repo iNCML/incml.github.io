@@ -51,11 +51,11 @@ $$
 $$
 
 and substitute 
-$\mathbf{x}_0 $ 
+\(\mathbf{x}_0 \)
 to further derive the relationship between any two adjacent samples, i.e. 
-$ \mathbf{x}_t $ 
+\(\mathbf{x}_t \)
 and 
-$ \mathbf{x}_{t-1} $, 
+\( \mathbf{x}_{t-1} \), 
 as follows:
 
 $$\begin{aligned}
