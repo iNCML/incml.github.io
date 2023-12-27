@@ -35,14 +35,15 @@ $$
 \mathbf{x}_t = f(\mathbf{x}_{0},t) = \sqrt{\bar{\alpha}_t} \mathbf{x}_{0} + \sqrt{1 - \bar{\alpha}_t} \,  {\boldsymbol \epsilon} \;\;\;\;\;\; \forall t=1, 2, \cdots, T
 $$
 
-where $\bar{\alpha}_t = \prod_{s=1}^t \alpha_s$. This method streamlines the process, making the generation of corrupted samples more straightforward and less computationally demanding.
+where $\bar{\alpha}_t = \prod_{s=1}^t \alpha_s$. 
+This method streamlines the process, making the generation of corrupted samples more straightforward and less computationally demanding.
 
 Assuming the application of the aforementioned formula in the diffusion process, let's explore the relationship between between  $\mathbf{x}_{t-1}$ and $\mathbf{x}_t$ in this case. This exploration will help us understand how consecutive stages in the diffusion process are interrelated, which is crucial in the subsequent backward denoising process. In fact, it's possible to establish how these two consecutive  samples are connected using two distinct approaches. 
 
 First of all, we have 
-$ \mathbf{x}_0 = \frac{1}{\sqrt{\bar{\alpha}_t}}
-\big[ \mathbf{x}_t - \sqrt{1 - \bar{\alpha}_t}\,   {\boldsymbol \epsilon} \big]
-$, and substitute $\mathbf{x}_0$ to further derive the relationship between any two adjacent samples, i.e. $\mathbf{x}_t$ and $\mathbf{x}_{t-1}$, as follows:
+$\mathbf{x}_0 = \frac{1}{\sqrt{\bar{\alpha}_t}}
+\big[ \mathbf{x}_t - \sqrt{1 - \bar{\alpha}_t}\,   {\boldsymbol \epsilon} \big]$, 
+and substitute $\mathbf{x}_0$ to further derive the relationship between any two adjacent samples, i.e. $\mathbf{x}_t$ and $\mathbf{x}_{t-1}$, as follows:
 
 $$\begin{aligned}
 \mathbf{x}_{t-1}  &= \sqrt{\bar{\alpha}_{t-1}} \mathbf{x}_{0} + \sqrt{1 - \bar{\alpha}_{t-1}} \,   {\boldsymbol \epsilon} \\
