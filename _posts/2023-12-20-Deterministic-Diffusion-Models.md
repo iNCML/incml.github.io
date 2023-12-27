@@ -129,7 +129,7 @@ At last, the sampling process to generate a new image can be described as follow
 
 * return $\mathbf{x}_0$
 
-#### **Estimating noise ${\boldsymbol \epsilon}$**
+#### **II. Estimating noise ${\boldsymbol \epsilon}$**
 
 In this case, we construct a deep neural network to  $\boldsymbol \theta$ to approximate the inverse function via estimating the noise ${\boldsymbol \epsilon}$ from each corrupted image $\mathbf{x}_t$ at each timestep $t$:
 
