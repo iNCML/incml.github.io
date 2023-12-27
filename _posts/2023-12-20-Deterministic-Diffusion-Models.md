@@ -19,14 +19,13 @@ In this post, we present a deterministic perspective on diffusion models. In thi
 
 ### **Forward Diffusion Process**
 
-As shown in Figure 1, starting with any input image, denoted as $\mathbf{x}_0$, drawn from a data distribution $p(\mathbf{x})$, the forward process incrementally corrupts the input image for each time steps $t=1,2,\cdots,T$. This corruption is achieved by  progressively adding varying levels of Gaussian noises as
+As shown in Figure 1, starting with any input image, denoted as $\mathbf{x}_0$, drawn from a data distribution $p(\mathbf{x})$, the forward process incrementally corrupts the input image for each time step $t=1,2,\cdots,T$. This corruption is achieved by  progressively adding varying levels of Gaussian noises as
 
 $$
 \mathbf{x}_t = \sqrt{\alpha_t } \mathbf{x}_{t-1} + \sqrt{1- \alpha_t } \,  {\boldsymbol \epsilon}_t \;\;\;\;\;\; \forall t=1, 2, \cdots, T
 $$
 
-where noise at each timestep ${\boldsymbol \epsilon}_t \sim \mathcal{N}(0, \mathbf{I})$,
-adhering to a predefined noise schedule: $\alpha_1, \alpha_2, \ldots, \alpha_T$ (with $1 > \alpha_1 > \alpha_2 > \ldots > \alpha_T \geq 0$). 
+adhering to a predefined noise schedule: $\alpha_1, \alpha_2, \ldots, \alpha_T$, where the noise at each timestep is Gaussian, ${\boldsymbol \epsilon}_t \sim \mathcal{N}(0, \mathbf{I})$.
 This process gradually introduces more noise at each step, leading to a sequence of increasingly corrupted versions of the original image: $\mathbf{x}_0 \to \mathbf{x}_1 \to \mathbf{x}_2 \to  \cdots \to \mathbf{x}_T$. When $T$ is large enough, the last image $\mathbf{x}_T$ approaches to a Gaussian noise, i.e. $\mathbf{x}_T \sim \mathcal{N}(0, \mathbf{I})$.
 
 Building on the approach outlined in $[4]$, the above diffusion process can be implemented much more efficiently. Rather than sampling a unique Gaussian noise at each timestep, it is feasible to sample a single Gaussian noise, $ \boldsymbol{\epsilon} \sim \mathcal{N}(0, \mathbf{I})$, and employ the subsequent formula to efficiently generate all the corrupted samples in one go (along the left-to-right red dash arrow in Figure 1):
@@ -148,7 +147,7 @@ Once we have learned this neural network, we can  derive an estimate of $\mathbf
 
 $$\begin{aligned}
 \mathbf{x}_{t-1} &= \frac{1}{\sqrt{\alpha_t}} \Big[ \mathbf{x}_t -  
-\frac{1-\alpha_t}{\sqrt{1-\bar{\alpha}_t}}\,   {\boldsymbol \epsilon} \Big] \\
+\frac{1-\alpha_t}{\sqrt{1-\bar{\alpha}_t}}\,   \hat{\boldsymbol \epsilon} \Big] \\
 &= \frac{1}{\sqrt{\alpha_t}} \Big[ \mathbf{x}_t -  
 \frac{1-\alpha_t}{\sqrt{1-\bar{\alpha}_t}}\,   g^{-1}_{\boldsymbol \theta} (\mathbf{x}_t, t) \Big] 
 \end{aligned}$$
@@ -185,7 +184,7 @@ $[4]$ Jonathan Ho, Ajay Jain, Pieter Abbeel, *Denoising Diffusion Probabilistic 
 $[5]$ Calvin Luo, *Understanding Diffusion Models: A Unified Perspective*, [arXiv:arXiv:arXiv:2208.11970
 ](https://arxiv.org/abs/2208.11970), 2022. 
 
-$[6]$ Sergios Karagiannakos,Nikolas Adaloglou, *How diffusion models work: the math from scratch*, https://theaisummer.com/diffusion-models/.
+$[6]$ Sergios Karagiannakos,Nikolas Adaloglou, *How diffusion models work: the math from scratch*, [https://theaisummer.com/diffusion-models/](https://theaisummer.com/diffusion-models/).
 
 
 
