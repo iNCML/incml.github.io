@@ -3,12 +3,12 @@ layout: post
 title: "A Deterministic View of Diffusion Models"
 date: 2023-12-20 
 ---
-*In this post, we present a deterministic perspective on diffusion models. In this approach, neural networks are trained as inverse deterministic functions that progressively denoise corrupted images at each timestep. This method simplifies the derivation of diffusion models, making the process more straightforward and comprehensive.*
+*In this post, we present a deterministic perspective on diffusion models. In this approach, neural networks are trained as an inverse function of the deterministic diffusion mapping that progressively corrupts images at each timestep. This method simplifies the derivation of diffusion models, making the process more straightforward and comprehensive.*
 <br><br>
 
 In recent years, diffusion models, a novel category of deep generative models $[1]$, have made significant strides in producing high-quality, high-resolution images. Notable examples include GLIDE $[2]$, DALLE-2 $[3]$, Imagen, and the fully open-source Stable Diffusion. These models are traditionally built on the framework of Denoising Diffusion Probabilistic Models (DDPM) $[4]$. In this probabilistic framework, the forward diffusion process is modeled as a Gaussian process with Markovian properties. Conversely, the backward denoising process employs neural networks to estimate the conditional distribution at each timestep. The neural networks involved in the denoising process are trained to minimize the evidence lower bound (ELBO) $[4]$ $[5]$, akin to the approach used in a Variational Autoencoder (VAE).
 
-In this post, we present a deterministic perspective on diffusion models. In this approach, neural networks are trained as inverse deterministic functions that progressively denoise corrupted images at each timestep. This method simplifies the derivation of diffusion models, making the process more straightforward and comprehensive.
+In this post, we present a deterministic perspective on diffusion models. In this method, neural networks are constructed to function in the opposite way of a deterministic diffusion process that gradually deteriorates images over time. This training allows the neural networks to reconstruct or generate images by reversing the diffusion process. This method simplifies the derivation of diffusion models, making the process more straightforward and comprehensive.
 
 <figure align="center">
   <img src="{{site.url}}/figures/deterministic-diffusion.png" width="600" alt> 
@@ -107,9 +107,10 @@ $$
 which can recover a rough estimate of the clean image $\hat{\mathbf{x}}_0$ from $\mathbf{x}_t$.
 In this case, this neural network is learned by minimizing the following objective function:
 
-$$
-L_1({\boldsymbol \theta}) = \sum_{\mathbf{x}_0} \sum_{t=1}^T \Big( f^{-1}_{\boldsymbol \theta} (\mathbf{x}_t, t) - \mathbf{x}_0\Big)^2
-$$
+$$\begin{aligned}
+L_1({\boldsymbol \theta}) &= \sum_{\mathbf{x}_0} \sum_{t=1}^T \Big( f^{-1}_{\boldsymbol \theta} (\mathbf{x}_t, t) - \mathbf{x}_0\Big)^2 \\
+&= \sum_{\mathbf{x}_0} \sum_{t=1}^T \Big( f^{-1}_{\boldsymbol \theta} \big(\sqrt{\bar{\alpha}_t} \mathbf{x}_{0} + \sqrt{1 - \bar{\alpha}_t} \,  {\boldsymbol \epsilon}, t \big) - \mathbf{x}_0\Big)^2
+\end{aligned}$$
 
 Once we have learned this neural network, we can  derive:
 
@@ -139,9 +140,10 @@ $$
 
 This neural network is learned by minimizing the following objective function:
 
-$$
-L_2({\boldsymbol \theta}) = \sum_{\mathbf{x}_0} \sum_{t=1}^T \Big( g^{-1}_{\boldsymbol \theta} (\mathbf{x}_t, t) - {\boldsymbol \epsilon}\Big)^2
-$$
+$$\begin{aligned}
+L_2({\boldsymbol \theta}) &= \sum_{\mathbf{x}_0} \sum_{t=1}^T \Big( g^{-1}_{\boldsymbol \theta} (\mathbf{x}_t, t) - {\boldsymbol \epsilon}\Big)^2 \\
+&= \sum_{\mathbf{x}_0} \sum_{t=1}^T \Big( g^{-1}_{\boldsymbol \theta} \big(\sqrt{\bar{\alpha}_t} \mathbf{x}_{0} + \sqrt{1 - \bar{\alpha}_t} \,  {\boldsymbol \epsilon}, t \big) - {\boldsymbol \epsilon}\Big)^2
+\end{aligned}$$
 
 Once we have learned this neural network, we can  derive an estimate of $\mathbf{x}_{t-1}$ as follows:
 
