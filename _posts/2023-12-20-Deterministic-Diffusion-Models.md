@@ -93,8 +93,8 @@ we gradually recover all corrupted images backwards one by one until we obtain t
 
 $$\mathbf{x}_T \to \mathbf{x}_{T-1} \to \mathbf{x}_{T-2} \to  \cdots \to \mathbf{x}_1 \to \mathbf{x}_0$$
 
-At each timestep, given the corrupted image ${\bf x}_t$, 
-in order to denoise to recover a slightly cleaner version of the image ${\bf x}_{t-1}$, we have two choices:
+At each timestep, given the corrupted image ${\mathbf x}_t$, 
+in order to denoise to recover a slightly cleaner version of the image $x_{t-1}$, we have two choices:
 
 #### **I. Estimating clean image $\mathbf{x}_0$**
 
@@ -111,7 +111,7 @@ $$
 L_1({\boldsymbol \theta}) = \sum_{\mathbf{x}_0} \sum_{t=1}^T \Big( f^{-1}_{\boldsymbol \theta} (\mathbf{x}_t, t) - \mathbf{x}_0\Big)^2
 $$
 
-Once we have learned this neural network, we can  derive an estimate of $\mathbf{x}_{t-1}$ from $\mathbf{x}_{t}$  as follows:
+Once we have learned this neural network, we can  derive:
 
 $$\begin{aligned}
 \mathbf{x}_{t-1} &= \mathbf{x}_t + \frac{\sqrt{\bar{\alpha}_{t-1}} (1- \alpha_t)}{2} \hat{\mathbf{x}}_0 \\
