@@ -102,7 +102,7 @@ in order to denoise to recover a slightly cleaner version of the image $x_{t-1}$
 In this case, we construct a deep neural network $\boldsymbol \theta$ to approximate the inverse function of the above diffusion mapping $\mathbf{x}_t = f(\mathbf{x}_0, t)$, denoted as
 
 $$
-\hat{\mathbf{x}}_0 = f^{-1}_{\boldsymbol \theta} (\mathbf{x}_t, t)
+\mathbf{\hat x}_0 = f^{-1}_{\boldsymbol \theta} (\mathbf{x}_t, t)
 $$
 
 which can recover a rough estimate of the clean image $\hat{\mathbf{x}}_0$ from $\mathbf{x}_t$.
