@@ -11,9 +11,9 @@ In recent years, diffusion models, a novel category of deep generative models $[
 In this post, we present a deterministic perspective on diffusion models. In this approach, neural networks are trained as inverse deterministic functions that progressively denoise corrupted images at each timestep. This method simplifies the derivation of diffusion models, making the process more straightforward and comprehensive.
 
 <figure align="center">
-<figcaption> Figure 1. A deterministic view of diffusion models in the forward diffusion process and the backward denoising transformation (Image adapted from [6]). 
-  </figcaption> 
   <img src="{{site.url}}/figures/deterministic-diffusion.png" width="600" alt> 
+  <figcaption> Figure 1. A deterministic view of diffusion models in the forward diffusion process and the backward denoising transformation (Image adapted from [6]). 
+  </figcaption> 
 </figure>
 
 
