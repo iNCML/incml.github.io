@@ -35,14 +35,20 @@ $$
 \mathbf{x}_t = f(\mathbf{x}_{0},t) = \sqrt{\bar{\alpha}_t} \mathbf{x}_{0} + \sqrt{1 - \bar{\alpha}_t} \,  {\boldsymbol \epsilon} \;\;\;\;\;\; \forall t=1, 2, \cdots, T
 $$
 
-where $\bar{\alpha}_t = \prod_{s=1}^t \alpha_s$. 
+where 
+
+$$\bar{\alpha}_t = \prod_{s=1}^t \alpha_s$$ 
+
 This method streamlines the process, making the generation of corrupted samples more straightforward and less computationally demanding.
 
 Assuming the application of the aforementioned formula in the diffusion process, let's explore the relationship between between  $\mathbf{x}_{t-1}$ and $\mathbf{x}_t$ in this case. This exploration will help us understand how consecutive stages in the diffusion process are interrelated, which is crucial in the subsequent backward denoising process. In fact, it's possible to establish how these two consecutive  samples are connected using two distinct approaches. 
 
 First of all, we have 
-$\mathbf{x}_0 = \frac{1}{\sqrt{\bar{\alpha}_t}}
-\big[ \mathbf{x}_t - \sqrt{1 - \bar{\alpha}_t}\,   {\boldsymbol \epsilon} \big]$, 
+$$
+mathbf{x}_0 = \frac{1}{\sqrt{\bar{\alpha}_t}}
+\big[ \mathbf{x}_t - \sqrt{1 - \bar{\alpha}_t}\,   {\boldsymbol \epsilon} \big]
+$$
+
 and substitute $\mathbf{x}_0$ to further derive the relationship between any two adjacent samples, i.e. $\mathbf{x}_t$ and $\mathbf{x}_{t-1}$, as follows:
 
 $$\begin{aligned}
@@ -59,8 +65,13 @@ $$\begin{aligned}
 \Big] \;\;\;\;\;\;\; (\mathrm{as} \; \alpha_t \ll 1)
 \end{aligned}$$
 
-Alternatively, we can have ${\boldsymbol \epsilon} 
-= \frac{1}{\sqrt{1 - \bar{\alpha}_{t}}} \big[ \mathbf{x}_t - \sqrt{\bar{\alpha}_t} \mathbf{x}_{0}\big]$, and substitute ${\boldsymbol \epsilon}$ into how $\mathbf{x}_{t-1}$ is computed, we have
+Alternatively, we can have 
+
+$${\boldsymbol \epsilon} 
+= \frac{1}{\sqrt{1 - \bar{\alpha}_{t}}} \big[ \mathbf{x}_t - \sqrt{\bar{\alpha}_t} \mathbf{x}_{0}\big]$$ 
+
+and substitute 
+${\boldsymbol \epsilon}$ into how $\mathbf{x}_{t-1}$ is computed, we have
 
 $$\begin{aligned}
 \mathbf{x}_{t-1}  &= \sqrt{\bar{\alpha}_{t-1}} \mathbf{x}_{0} + \sqrt{1 - \bar{\alpha}_{t-1}} \,   {\boldsymbol \epsilon} \\
@@ -73,8 +84,12 @@ $$\begin{aligned}
 
 ### **Backward Denoising Process**
 
-In the backward process, starting from a Gaussian noise $\mathbf{x}_T \sim \cal{N}(0, \mathbf{I})$,  
-we gradually recover all corrupted images backwards one by one until we obtain the initial clean image: $\mathbf{x}_T \to \mathbf{x}_{T-1} \to \mathbf{x}_{T-2} \to  \cdots \to \mathbf{x}_1 \to \mathbf{x}_0$.
+In the backward process, starting from a Gaussian noise 
+$$\mathbf{x}_T \sim \cal{N}(0, \mathbf{I})$$  
+
+we gradually recover all corrupted images backwards one by one until we obtain the initial clean image: 
+
+$$\mathbf{x}_T \to \mathbf{x}_{T-1} \to \mathbf{x}_{T-2} \to  \cdots \to \mathbf{x}_1 \to \mathbf{x}_0$$
 
 At each timestep, given the corrupted image $\mathbf{x}_t$, in order to denoise to recover a slightly cleaner version of the image $\mathbf{x}_{t-1}$, we have two choices:
 
@@ -85,8 +100,10 @@ In this case, we construct a deep neural network $\boldsymbol \theta$ to approxi
 $$
 \hat{\mathbf{x}}_0 = f^{-1}_{\boldsymbol \theta} (\mathbf{x}_t, t)
 $$
+
 which can recover a rough estimate of the clean image $\hat{\mathbf{x}}_0$ from $\mathbf{x}_t$.
 In this case, this neural network is learned by minimizing the following objective function:
+
 $$
 L_1({\boldsymbol \theta}) = \sum_{\mathbf{x}_0} \sum_{t=1}^T \Big( f^{-1}_{\boldsymbol \theta} (\mathbf{x}_t, t) - \mathbf{x}_0\Big)^2
 $$
@@ -103,7 +120,10 @@ At last, the sampling process to generate a new image can be described as follow
 1. sample a Gaussian noise $\mathbf{x}_T \sim \mathcal{N}(0, \mathbf{I}) $
 2. for $t=T, T-1, \cdots, 1$:
  * 2.1) if $t>1$, sample another noise $\mathbf{z} \sim \mathcal{N}(0, \mathbf{I})$, else $\mathbf{z}=0$
- * 2.2) $\mathbf{x}_{t-1} = \mathbf{x}_t + \frac{\sqrt{\bar{\alpha}_{t-1}} (1- \alpha_t)}{2} f^{-1}_{\boldsymbol \theta} (\mathbf{x}_t, t) + \sigma_t  \mathbf{z}$
+ * 2.2) denoise:
+ 
+ $$\mathbf{x}_{t-1} = \mathbf{x}_t + \frac{\sqrt{\bar{\alpha}_{t-1}} (1- \alpha_t)}{2} f^{-1}_{\boldsymbol \theta} (\mathbf{x}_t, t) + \sigma_t  \mathbf{z}$$
+ 
 3. return $\mathbf{x}_0$
 
 #### **Estimating noise ${\boldsymbol \epsilon}$**
@@ -134,9 +154,12 @@ At last, the sampling process to generate a new image can be described as follow
 1. sample a Gaussian noise $\mathbf{x}_T \sim \mathcal{N}(0, \mathbf{I}) $
 2. for $t=T, T-1, \cdots, 1$:
  * 2.1) if $t>1$, sample another noise $\mathbf{z} \sim \mathcal{N}(0, \mathbf{I})$, else $\mathbf{z}=0$
- * 2.2) $\mathbf{x}_{t-1} = \frac{1}{\sqrt{\alpha_t}} \big[ \mathbf{x}_t -  
+ * 2.2) denoise:
+ 
+ $$\mathbf{x}_{t-1} = \frac{1}{\sqrt{\alpha_t}} \big[ \mathbf{x}_t -  
 \frac{1-\alpha_t}{\sqrt{1-\bar{\alpha}_t}}\,   g^{-1}_{\boldsymbol \theta} (\mathbf{x}_t, t)
-\big] + \sigma_t  \mathbf{z}$
+\big] + \sigma_t  \mathbf{z}$$
+
 3. return $\mathbf{x}_0$
 
 
