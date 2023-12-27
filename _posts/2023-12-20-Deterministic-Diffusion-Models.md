@@ -50,9 +50,7 @@ $$
 \big[ \mathbf{x}_t - \sqrt{1 - \bar{\alpha}_t}\,   {\boldsymbol \epsilon} \big]
 $$
 
-and further derive the relationship between any two adjacent samples, i.e.  $ \mathbf{x}_t $
-and $ \mathbf{x}_{t-1} $ , 
-as follows:
+and substitue the above to further derive the relationship between any two adjacent samples as follows:
 
 $$\begin{aligned}
 \mathbf{x}_{t-1}  &= \sqrt{\bar{\alpha}_{t-1}} \mathbf{x}_{0} + \sqrt{1 - \bar{\alpha}_{t-1}} \,   {\boldsymbol \epsilon} \\
@@ -95,9 +93,8 @@ we gradually recover all corrupted images backwards one by one until we obtain t
 
 $$\mathbf{x}_T \to \mathbf{x}_{T-1} \to \mathbf{x}_{T-2} \to  \cdots \to \mathbf{x}_1 \to \mathbf{x}_0$$
 
-At each timestep, given the corrupted image 
-$ \mathbf{x}_t $, 
-in order to denoise to recover a slightly cleaner version of the image $ \mathbf{x}_{t-1} $, we have two choices:
+At each timestep, given the corrupted image $\mathbf{x}_t$, 
+in order to denoise to recover a slightly cleaner version of the image $\mathbf{x}_{t-1}$, we have two choices:
 
 #### **I. Estimating clean image $\mathbf{x}_0$**
 
