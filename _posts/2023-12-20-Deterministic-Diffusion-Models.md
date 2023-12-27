@@ -86,7 +86,7 @@ $$\begin{aligned}
 
 In the backward process, starting from a Gaussian noise 
 
-$$\mathbf{x}_T \sim \cal{N}(0, \mathbf{I})$$  
+$$\mathbf{x}_T \sim \mathcal{N}(0, \mathbf{I})$$  
 
 we gradually recover all corrupted images backwards one by one until we obtain the initial clean image: 
 
