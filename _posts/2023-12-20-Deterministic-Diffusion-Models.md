@@ -20,17 +20,21 @@ In this post, we present a deterministic perspective on diffusion models. In thi
 ### **Forward Diffusion Process**
 
 As shown in Figure 1, starting with any input image, denoted as $\mathbf{x}_0$, drawn from a data distribution $p(\mathbf{x})$, the forward process incrementally corrupts the input image for each time steps $t=1,2,\cdots,T$. This corruption is achieved by  progressively adding varying levels of Gaussian noises as
+
 $$
 \mathbf{x}_t = \sqrt{\alpha_t } \mathbf{x}_{t-1} + \sqrt{1- \alpha_t } \,  {\boldsymbol \epsilon}_t \;\;\;\;\;\; \forall t=1, 2, \cdots, T
 $$
+
 where noise at each timestep ${\boldsymbol \epsilon}_t \sim \mathcal{N}(0, \mathbf{I})$,
 adhering to a predefined noise schedule: $\alpha_1, \alpha_2, \ldots, \alpha_T$ (with $1 > \alpha_1 > \alpha_2 > \ldots > \alpha_T \geq 0$). 
 This process gradually introduces more noise at each step, leading to a sequence of increasingly corrupted versions of the original image: $\mathbf{x}_0 \to \mathbf{x}_1 \to \mathbf{x}_2 \to  \cdots \to \mathbf{x}_T$. When $T$ is large enough, the last image $\mathbf{x}_T$ approaches to a Gaussian noise, i.e. $\mathbf{x}_T \sim \mathcal{N}(0, \mathbf{I})$.
 
 Building on the approach outlined in $[4]$, the above diffusion process can be implemented much more efficiently. Rather than sampling a unique Gaussian noise at each timestep, it is feasible to sample a single Gaussian noise, $ \boldsymbol{\epsilon} \sim \mathcal{N}(0, \mathbf{I})$, and employ the subsequent formula to efficiently generate all the corrupted samples in one go (along the left-to-right red dash arrow in Figure 1):
+
 $$
 \mathbf{x}_t = f(\mathbf{x}_{0},t) = \sqrt{\bar{\alpha}_t} \mathbf{x}_{0} + \sqrt{1 - \bar{\alpha}_t} \,  {\boldsymbol \epsilon} \;\;\;\;\;\; \forall t=1, 2, \cdots, T
 $$
+
 where $\bar{\alpha}_t = \prod_{s=1}^t \alpha_s$. This method streamlines the process, making the generation of corrupted samples more straightforward and less computationally demanding.
 
 Assuming the application of the aforementioned formula in the diffusion process, let's explore the relationship between between  $\mathbf{x}_{t-1}$ and $\mathbf{x}_t$ in this case. This exploration will help us understand how consecutive stages in the diffusion process are interrelated, which is crucial in the subsequent backward denoising process. In fact, it's possible to establish how these two consecutive  samples are connected using two distinct approaches. 
@@ -39,6 +43,7 @@ First of all, we have
 $ \mathbf{x}_0 = \frac{1}{\sqrt{\bar{\alpha}_t}}
 \big[ \mathbf{x}_t - \sqrt{1 - \bar{\alpha}_t}\,   {\boldsymbol \epsilon} \big]
 $, and substitute $\mathbf{x}_0$ to further derive the relationship between any two adjacent samples, i.e. $\mathbf{x}_t$ and $\mathbf{x}_{t-1}$, as follows:
+
 $$\begin{aligned}
 \mathbf{x}_{t-1}  &= \sqrt{\bar{\alpha}_{t-1}} \mathbf{x}_{0} + \sqrt{1 - \bar{\alpha}_{t-1}} \,   {\boldsymbol \epsilon} \\
 &= \frac{1}{\sqrt{\alpha_t}} \big[ \mathbf{x}_t - \sqrt{1 - \bar{\alpha}_t}\,   {\boldsymbol \epsilon} \big] + \sqrt{1 - \bar{\alpha}_{t-1}} \,   {\boldsymbol \epsilon} \\
@@ -55,6 +60,7 @@ $$\begin{aligned}
 
 Alternatively, we can have ${\boldsymbol \epsilon} 
 = \frac{1}{\sqrt{1 - \bar{\alpha}_{t}}} \big[ \mathbf{x}_t - \sqrt{\bar{\alpha}_t} \mathbf{x}_{0}\big]$, and substitute ${\boldsymbol \epsilon}$ into how $\mathbf{x}_{t-1}$ is computed, we have
+
 $$\begin{aligned}
 \mathbf{x}_{t-1}  &= \sqrt{\bar{\alpha}_{t-1}} \mathbf{x}_{0} + \sqrt{1 - \bar{\alpha}_{t-1}} \,   {\boldsymbol \epsilon} \\
 &= \sqrt{\bar{\alpha}_{t-1}} \mathbf{x}_{0}  + \frac{\sqrt{1 - \bar{\alpha}_{t-1}}}{\sqrt{1 - \bar{\alpha}_{t}}}
@@ -74,6 +80,7 @@ At each timestep, given the corrupted image $\mathbf{x}_t$, in order to denoise 
 #### **I. Estimating clean image $\mathbf{x}_0$**
 
 In this case, we construct a deep neural network $\boldsymbol \theta$ to approximate the inverse function of the above diffusion mapping $\mathbf{x}_t = f(\mathbf{x}_0, t)$, denoted as
+
 $$
 \hat{\mathbf{x}}_0 = f^{-1}_{\boldsymbol \theta} (\mathbf{x}_t, t)
 $$
@@ -84,6 +91,7 @@ L_1({\boldsymbol \theta}) = \sum_{\mathbf{x}_0} \sum_{t=1}^T \Big( f^{-1}_{\bold
 $$
 
 Once we have learned this neural network, we can  derive an estimate of $\mathbf{x}_{t-1}$ from $\mathbf{x}_{t}$  as follows:
+
 $$\begin{aligned}
 \mathbf{x}_{t-1} &= \mathbf{x}_t + \frac{\sqrt{\bar{\alpha}_{t-1}} (1- \alpha_t)}{2} \hat{\mathbf{x}}_0 \\
 &= \mathbf{x}_t + \frac{\sqrt{\bar{\alpha}_{t-1}} (1- \alpha_t)}{2} f^{-1}_{\boldsymbol \theta} (\mathbf{x}_t, t)
@@ -100,15 +108,19 @@ At last, the sampling process to generate a new image can be described as follow
 #### **Estimating noise ${\boldsymbol \epsilon}$**
 
 In this case, we construct a deep neural network to  $\boldsymbol \theta$ to approximate the inverse function via estimating the noise ${\boldsymbol \epsilon}$ from each corrupted image $\mathbf{x}_t$ at each timestep $t$:
+
 $$
 \hat{\boldsymbol \epsilon} = g^{-1}_{\boldsymbol \theta} (\mathbf{x}_t, t)
 $$
+
 This neural network is learned by minimizing the following objective function:
+
 $$
 L_2({\boldsymbol \theta}) = \sum_{\mathbf{x}_0} \sum_{t=1}^T \Big( g^{-1}_{\boldsymbol \theta} (\mathbf{x}_t, t) - {\boldsymbol \epsilon}\Big)^2
 $$
 
 Once we have learned this neural network, we can  derive an estimate of $\mathbf{x}_{t-1}$ as follows:
+
 $$\begin{aligned}
 \mathbf{x}_{t-1} &= \frac{1}{\sqrt{\alpha_t}} \Big[ \mathbf{x}_t -  
 \frac{1-\alpha_t}{\sqrt{1-\bar{\alpha}_t}}\,   {\boldsymbol \epsilon} \Big] \\
