@@ -60,9 +60,15 @@ $$\begin{aligned}
 &= \frac{1}{\sqrt{\alpha_t}} \Big[ \mathbf{x}_t -  
 \frac{1-\alpha_t}{\sqrt{1-\bar{\alpha}_t} + \sqrt{\alpha_t-\bar{\alpha}_t}}\,   {\boldsymbol \epsilon} 
 \Big] \\
-&\approx \frac{1}{\sqrt{\alpha_t}} \Big[ \mathbf{x}_t -  
-\frac{1-\alpha_t}{\sqrt{1-\bar{\alpha}_t}}\,   {\boldsymbol \epsilon} 
-\Big] \;\;\;\;\;\;\; (\mathrm{as} \; \alpha_t \ll 1)
+&\approx 
+\begin{cases}
+   \frac{1}{\sqrt{\alpha_t}} \big[ \mathbf{x}_t -  
+\frac{1-\sqrt{\alpha_t}}{\sqrt{1-\bar{\alpha}_t}}\,   {\boldsymbol \epsilon} 
+\big] & \;\;(\mathrm{as} \; \bar{\alpha}_t \approx  \bar{\alpha}_{t-1}) \\
+\frac{1}{\sqrt{\alpha_t}} \Big[ \mathbf{x}_t -  
+\frac{1-\alpha_t}{2\sqrt{1-\bar{\alpha}_t}}\,   {\boldsymbol \epsilon} 
+\Big] & \;\;(\mathrm{as} \; \alpha_t \approx  1)
+\end{cases}
 \end{aligned}$$
 
 Alternatively, we can have 
@@ -77,10 +83,25 @@ $$\begin{aligned}
 \mathbf{x}_{t-1}  &= \sqrt{\bar{\alpha}_{t-1}} \mathbf{x}_{0} + \sqrt{1 - \bar{\alpha}_{t-1}} \,   {\boldsymbol \epsilon} \\
 &= \sqrt{\bar{\alpha}_{t-1}} \mathbf{x}_{0}  + \frac{\sqrt{1 - \bar{\alpha}_{t-1}}}{\sqrt{1 - \bar{\alpha}_{t}}}
 \big[ \mathbf{x}_t - \sqrt{\bar{\alpha}_t} \mathbf{x}_{0}\big] \\
-& \approx \mathbf{x}_t + \big[ \sqrt{\bar{\alpha}_{t-1}} - \sqrt{\bar{\alpha}_{t}}\, \big] \mathbf{x}_{0} \;\;\;\;\;\; (\mathrm{as} \;  1- \bar{\alpha}_{t} \approx 1- \bar{\alpha}_{t-1}) \\
-&= \mathbf{x}_t + \frac{\bar{\alpha}_{t-1} (1-\alpha_t)}{\sqrt{\bar{\alpha}_{t-1}} + \sqrt{\bar{\alpha}_{t}}} \mathbf{x}_0 \\
-& \approx \mathbf{x}_t + \frac{\sqrt{\bar{\alpha}_{t-1}} (1- \alpha_t)}{2} \mathbf{x}_0
 \end{aligned}$$
+
+If we denote 
+
+$$
+\bar{\gamma}_t = \frac{1-\bar{\alpha}_{t-1}}{1-\bar{\alpha}_{t}} 
+$$
+
+we can simplify the above equation as follows:
+
+$$\begin{aligned}
+\mathbf{x}_{t-1} &= \sqrt{\bar{\gamma}_t} \, \mathbf{x}_t 
++ \big( \sqrt{\bar{\alpha}_{t-1}} -  \sqrt{\bar{\gamma}_t  \bar{\alpha}_t} \big) \mathbf{x}_0 \\
+&= \sqrt{\bar{\gamma}_t} \, \mathbf{x}_t 
++ \frac{\bar{\alpha}_{t-1} (1 - \bar{\gamma}_t  \alpha_t)}{\sqrt{\bar{\alpha}_{t-1}} +  \sqrt{\bar{\gamma}_t  \bar{\alpha}_t} }\mathbf{x}_0 \\
+&\approx \sqrt{\bar{\gamma}_t} \, \mathbf{x}_t 
++ \frac{\sqrt{\bar{\alpha}_{t-1}} (1 - \bar{\gamma}_t  \alpha_t)}{2}\mathbf{x}_0 \;\;\;\;\;\;\;\;(\mathrm{as} \; \bar{\gamma}_t \approx 1 \;\mathrm{and} \;  \bar{\alpha}_{t} \approx \bar{\alpha}_{t-1})
+\end{aligned}$$
+
 
 ### **Backward Denoising Process**
 
@@ -115,18 +136,27 @@ L_1({\boldsymbol \theta}) &= \sum_{\mathbf{x}_0} \sum_{t=1}^T \Big( f^{-1}_{\bol
 Once we have learned this neural network, we can  derive:
 
 $$\begin{aligned}
-\mathbf{x}_{t-1} &= \mathbf{x}_t + \frac{\sqrt{\bar{\alpha}_{t-1}} (1- \alpha_t)}{2} \hat{\mathbf{x}}_0 \\
-&= \mathbf{x}_t + \frac{\sqrt{\bar{\alpha}_{t-1}} (1- \alpha_t)}{2} f^{-1}_{\boldsymbol \theta} (\mathbf{x}_t, t)
+\mathbf{x}_{t-1} &= 
+\sqrt{\bar{\gamma}_t} \, \mathbf{x}_t 
++ \big( \sqrt{\bar{\alpha}_{t-1}} -  \sqrt{\bar{\gamma}_t  \bar{\alpha}_t} \big) \hat{\mathbf{x}}_0
+% \mathbf{x}_t + \frac{\sqrt{\bar{\alpha}_{t-1}} (1- \alpha_t)}{2}  
+\\
+&= 
+\sqrt{\bar{\gamma}_t} \, \mathbf{x}_t 
++ \big( \sqrt{\bar{\alpha}_{t-1}} -  \sqrt{\bar{\gamma}_t  \bar{\alpha}_t} \big)  f^{-1}_{\boldsymbol \theta} (\mathbf{x}_t, t)
 \end{aligned}$$
 
 At last, the sampling process to generate a new image can be described as follows:
 
 * sample a Gaussian noise $\mathbf{x}_T \sim \mathcal{N}(0, \mathbf{I}) $
-* for $t=T, T-1, \cdots, 1$:
-  * if $t>1$, sample another noise $\mathbf{z} \sim \mathcal{N}(0, \mathbf{I})$, else $\mathbf{z}=0$
+* for $t=T, T-1, \cdots, 1$, denoise as
+  <!-- * if $t>1$, sample another noise $\mathbf{z} \sim \mathcal{N}(0, \mathbf{I})$, else $\mathbf{z}=0$
   * denoise:
- 
- $$\mathbf{x}_{t-1} = \mathbf{x}_t + \frac{\sqrt{\bar{\alpha}_{t-1}} (1- \alpha_t)}{2} f^{-1}_{\boldsymbol \theta} (\mathbf{x}_t, t) + \sigma_t  \mathbf{z}$$
+  -->
+$$
+ \mathbf{x}_{t-1} = \sqrt{\bar{\gamma}_t} \, \mathbf{x}_t 
++ \big( \sqrt{\bar{\alpha}_{t-1}} -  \sqrt{\bar{\gamma}_t  \bar{\alpha}_t} \big)  f^{-1}_{\boldsymbol \theta} (\mathbf{x}_t, t) % + \sigma_t  \mathbf{z}
+$$
 
 * return $\mathbf{x}_0$
 
@@ -149,21 +179,22 @@ Once we have learned this neural network, we can  derive an estimate of $\mathbf
 
 $$\begin{aligned}
 \mathbf{x}_{t-1} &= \frac{1}{\sqrt{\alpha_t}} \Big[ \mathbf{x}_t -  
-\frac{1-\alpha_t}{\sqrt{1-\bar{\alpha}_t}}\,   \hat{\boldsymbol \epsilon} \Big] \\
+\frac{1-\sqrt{\alpha_t}}{\sqrt{1-\bar{\alpha}_t}}\,   \hat{\boldsymbol \epsilon} \Big] \\
 &= \frac{1}{\sqrt{\alpha_t}} \Big[ \mathbf{x}_t -  
-\frac{1-\alpha_t}{\sqrt{1-\bar{\alpha}_t}}\,   g^{-1}_{\boldsymbol \theta} (\mathbf{x}_t, t) \Big] 
+\frac{1-\sqrt{\alpha_t}}{\sqrt{1-\bar{\alpha}_t}}\,   g^{-1}_{\boldsymbol \theta} (\mathbf{x}_t, t) \Big] 
 \end{aligned}$$
 
 At last, the sampling process to generate a new image can be described as follows:
 
 * sample a Gaussian noise $\mathbf{x}_T \sim \mathcal{N}(0, \mathbf{I}) $
-* for $t=T, T-1, \cdots, 1$:
-  * if $t>1$, sample another noise $\mathbf{z} \sim \mathcal{N}(0, \mathbf{I})$, else $\mathbf{z}=0$
-  * denoise:
+* for $t=T, T-1, \cdots, 1$, denoise as
+  <!-- * if $t>1$, sample another noise $\mathbf{z} \sim \mathcal{N}(0, \mathbf{I})$, else $\mathbf{z}=0$
+  * denoise: -->
  
- $$\mathbf{x}_{t-1} = \frac{1}{\sqrt{\alpha_t}} \big[ \mathbf{x}_t -  
-\frac{1-\alpha_t}{\sqrt{1-\bar{\alpha}_t}}\,   g^{-1}_{\boldsymbol \theta} (\mathbf{x}_t, t)
-\big] + \sigma_t  \mathbf{z}$$
+$$\mathbf{x}_{t-1} = \frac{1}{\sqrt{\alpha_t}} \Big[ \mathbf{x}_t -  
+\frac{1-\sqrt{\alpha_t}}{\sqrt{1-\bar{\alpha}_t}}\,   g^{-1}_{\boldsymbol \theta} (\mathbf{x}_t, t)
+\Big] % + \sigma_t  \mathbf{z}
+$$
 
 * return $\mathbf{x}_0$
 
@@ -180,10 +211,10 @@ $[2]$ Alex Nichol, Prafulla Dhariwal, *et.al.*,
 $[3]$  Aditya Ramesh, Prafulla Dhariwal, *et.al.*, *Hierarchical Text-Conditional Image Generation with CLIP Latents*, [arXiv:2204.06125
 ](https://arxiv.org/abs/2204.06125), 2022. 
 
-$[4]$ Jonathan Ho, Ajay Jain, Pieter Abbeel, *Denoising Diffusion Probabilistic Models*, [arXiv:arXiv:2006.11239
+$[4]$ Jonathan Ho, Ajay Jain, Pieter Abbeel, *Denoising Diffusion Probabilistic Models*, [arXiv:2006.11239
 ](https://arxiv.org/abs/2006.11239), 2020. 
 
-$[5]$ Calvin Luo, *Understanding Diffusion Models: A Unified Perspective*, [arXiv:arXiv:arXiv:2208.11970
+$[5]$ Calvin Luo, *Understanding Diffusion Models: A Unified Perspective*, [arXiv:2208.11970
 ](https://arxiv.org/abs/2208.11970), 2022. 
 
 $[6]$ Sergios Karagiannakos,Nikolas Adaloglou, *How diffusion models work: the math from scratch*, [https://theaisummer.com/diffusion-models/](https://theaisummer.com/diffusion-models/).
