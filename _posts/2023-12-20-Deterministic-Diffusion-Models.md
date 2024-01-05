@@ -150,12 +150,10 @@ At last, the sampling process to generate a new image can be described as follow
 
 * sample a Gaussian noise $\mathbf{x}_T \sim \mathcal{N}(0, \mathbf{I}) $
 * for $t=T, T-1, \cdots, 1$, denoise as
-  <!-- * if $t>1$, sample another noise $\mathbf{z} \sim \mathcal{N}(0, \mathbf{I})$, else $\mathbf{z}=0$
-  * denoise:
-  -->
+
 $$
  \mathbf{x}_{t-1} = \sqrt{\bar{\gamma}_t} \, \mathbf{x}_t 
-+ \big( \sqrt{\bar{\alpha}_{t-1}} -  \sqrt{\bar{\gamma}_t  \bar{\alpha}_t} \big)  f^{-1}_{\boldsymbol \theta} (\mathbf{x}_t, t) % + \sigma_t  \mathbf{z}
++ \big( \sqrt{\bar{\alpha}_{t-1}} -  \sqrt{\bar{\gamma}_t  \bar{\alpha}_t} \big)  f^{-1}_{\boldsymbol \theta} (\mathbf{x}_t, t) 
 $$
 
 * return $\mathbf{x}_0$
@@ -188,12 +186,10 @@ At last, the sampling process to generate a new image can be described as follow
 
 * sample a Gaussian noise $\mathbf{x}_T \sim \mathcal{N}(0, \mathbf{I}) $
 * for $t=T, T-1, \cdots, 1$, denoise as
-  <!-- * if $t>1$, sample another noise $\mathbf{z} \sim \mathcal{N}(0, \mathbf{I})$, else $\mathbf{z}=0$
-  * denoise: -->
- 
+
 $$\mathbf{x}_{t-1} = \frac{1}{\sqrt{\alpha_t}} \Big[ \mathbf{x}_t -  
 \frac{1-\sqrt{\alpha_t}}{\sqrt{1-\bar{\alpha}_t}}\,   g^{-1}_{\boldsymbol \theta} (\mathbf{x}_t, t)
-\Big] % + \sigma_t  \mathbf{z}
+\Big] 
 $$
 
 * return $\mathbf{x}_0$
