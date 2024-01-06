@@ -149,11 +149,17 @@ $$\begin{aligned}
 At last, the sampling process to generate a new image can be described as follows:
 
 * sample a Gaussian noise $\mathbf{x}_T \sim \mathcal{N}(0, \mathbf{I}) $
-* for $t=T, T-1, \cdots, 1$, denoise as
+* for $t=T, T-1, \cdots, 1$:
+  * compute 
+  
+  $$\hat{\mathbf{x}}_0 = f^{-1}_{\boldsymbol \theta} (\mathbf{x}_t, t)$$
+
+  * **if** $\hat{\mathbf{x}}_0$ is stable, return $\hat{\mathbf{x}}_0$
+  * **else** denoise one step backward as 
 
 $$
  \mathbf{x}_{t-1} = \sqrt{\bar{\gamma}_t} \, \mathbf{x}_t 
-+ \big( \sqrt{\bar{\alpha}_{t-1}} -  \sqrt{\bar{\gamma}_t  \bar{\alpha}_t} \big)  f^{-1}_{\boldsymbol \theta} (\mathbf{x}_t, t) 
++ \big( \sqrt{\bar{\alpha}_{t-1}} -  \sqrt{\bar{\gamma}_t  \bar{\alpha}_t} \big)  \hat{\mathbf{x}}_0
 $$
 
 * return $\mathbf{x}_0$
@@ -185,10 +191,18 @@ $$\begin{aligned}
 At last, the sampling process to generate a new image can be described as follows:
 
 * sample a Gaussian noise $\mathbf{x}_T \sim \mathcal{N}(0, \mathbf{I}) $
-* for $t=T, T-1, \cdots, 1$, denoise as
+
+* **for** $t=T, T-1, \cdots, 1$:
+  * compute $\hat{\boldsymbol \epsilon} = g^{-1}_{\boldsymbol \theta} (\mathbf{x}_t, t)$ and $\hat{\mathbf{x}}_0 = \frac{1}{\sqrt{\bar{\alpha}_t}}
+\big[ \mathbf{x}_t - \sqrt{1 - \bar{\alpha}_t}\,    
+\hat{\boldsymbol \epsilon}  \big]$
+
+  * **if** $\hat{\mathbf{x}}_0$ is stable, return $\hat{\mathbf{x}}_0$
+
+  * **else** denoise one step backward as 
 
 $$\mathbf{x}_{t-1} = \frac{1}{\sqrt{\alpha_t}} \Big[ \mathbf{x}_t -  
-\frac{1-\sqrt{\alpha_t}}{\sqrt{1-\bar{\alpha}_t}}\,   g^{-1}_{\boldsymbol \theta} (\mathbf{x}_t, t)
+\frac{1-\sqrt{\alpha_t}}{\sqrt{1-\bar{\alpha}_t}}\,   \hat{\boldsymbol \epsilon} 
 \Big] 
 $$
 
