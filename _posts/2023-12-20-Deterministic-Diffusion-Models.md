@@ -149,7 +149,7 @@ $$\begin{aligned}
 At last, the sampling process to generate a new image can be described as follows:
 
 * sample a Gaussian noise $\mathbf{x}_T \sim \mathcal{N}(0, \mathbf{I}) $
-* for $t=T, T-1, \cdots, 1$:
+* **for** $t=T, T-1, \cdots, 1$:
   * compute 
   
   $$\hat{\mathbf{x}}_0 = f^{-1}_{\boldsymbol \theta} (\mathbf{x}_t, t)$$
