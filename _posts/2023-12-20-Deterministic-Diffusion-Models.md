@@ -38,7 +38,15 @@ where
 
 $$\bar{\alpha}_t = \prod_{s=1}^t \alpha_s$$ 
 
-This method streamlines the process, making the generation of corrupted samples more straightforward and less computationally demanding.
+and we have $\bar{\alpha}_t \to 0$ as $t \to T$.
+As shown in Figure 2, clean images are gradually converted into pure noises in the above deterministic diffusion process as $t$ goes from $0$ to $T$.
+This method streamlines the process, making the generation of corrupted samples more straightforward and less computationally demanding. 
+
+<figure align="center">
+  <img src="{{site.url}}/figures/deterministic-diffusion-process.png" width="400" alt> 
+  <figcaption> Figure 2. The deterministic difussion process of some images selected from the MNIST-Fashion dataset. 
+  </figcaption> 
+</figure>
 
 Assuming the application of the aforementioned formula in the diffusion process, let's explore the relationship between between  $\mathbf{x}_{t-1}$ and $\mathbf{x}_t$ in this case. This exploration will help us understand how consecutive stages in the diffusion process are interrelated, which is crucial in the subsequent backward denoising process. In fact, it's possible to establish how these two consecutive  samples are connected using two distinct approaches. 
 
@@ -114,8 +122,9 @@ we gradually recover all corrupted images backwards one by one until we obtain t
 $$\mathbf{x}_T \to \mathbf{x}_{T-1} \to \mathbf{x}_{T-2} \to  \cdots \to \mathbf{x}_1 \to \mathbf{x}_0$$
 
 At each timestep, given the corrupted image 
-$x_t$, 
-in order to denoise to recover a slightly cleaner version of the image $x_{t-1}$, we have two choices:
+$x_t$, we may estimate the original clean image $x_0$ based on $x_t$. If the estimate is not good enough, we can 
+further denoise one timestep backwards, i.e. deriving $x_{t-1}$ from $x_t$. Based on $x_{t-1}$, we may derive a better estimate of the clean image $x_0$. This sampling process may continue until we finally obtain a sufficiently good clean image $x_0$. 
+In order to recover a slightly cleaner version of the image $x_{t-1}$ from $x_{t}$ from, we have two choices:
 
 #### **I. Estimating clean image $\mathbf{x}_0$**
 
@@ -164,6 +173,15 @@ $$
 
 * return $\mathbf{x}_0$
 
+In Figure 3, we have shown some sampling results from the MNIST-Fashion dataset via building neural networks to estimate clean images through the above sampling algorithm. 
+
+<figure align="center">
+  <img src="{{site.url}}/figures/deterministic_denoising_via_cleanimage.png" width="400" alt> 
+  <figcaption> Figure 3. Some sampling results are shown from the MNIST-Fashion dataset via building neural networks to estimate clean images. Every two lines represent one sampling example: the first line displays denoising samples at each timestep while the second line shows the estimated clean image at each timestep.
+  </figcaption> 
+</figure>
+
+
 #### **II. Estimating noise ${\boldsymbol \epsilon}$**
 
 In this case, we construct a deep neural network to  $\boldsymbol \theta$ to approximate the inverse function via estimating the noise ${\boldsymbol \epsilon}$ from each corrupted image $\mathbf{x}_t$ at each timestep $t$:
@@ -207,6 +225,15 @@ $$\mathbf{x}_{t-1} = \frac{1}{\sqrt{\alpha_t}} \Big[ \mathbf{x}_t -
 $$
 
 * return $\mathbf{x}_0$
+
+
+In Figure 4, we have shown some sampling results from the MNIST-Fashion dataset via building neural networks to estimate noises through the above sampling algorithm. 
+
+<figure align="center">
+  <img src="{{site.url}}/figures/deterministic_denoising_via_noise.png" width="400" alt> 
+  <figcaption> Figure 4. Some sampling results are shown from the MNIST-Fashion dataset via building neural networks to estimate noises. Every two lines represent one sampling example: the first line displays denoising samples at each timestep while the second line shows the estimated clean image at each timestep.
+  </figcaption> 
+</figure>
 
 
 ### **References**
