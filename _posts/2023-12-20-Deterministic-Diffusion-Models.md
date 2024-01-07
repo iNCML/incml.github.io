@@ -122,10 +122,10 @@ we gradually recover all corrupted images backwards one by one until we obtain t
 $$\mathbf{x}_T \to \mathbf{x}_{T-1} \to \mathbf{x}_{T-2} \to  \cdots \to \mathbf{x}_1 \to \mathbf{x}_0$$
 
 Alternatively, at each timestep, given the corrupted image 
-${\bf x}_t$, we may also directly estimate the original clean image ${\bf x}_0$ based on ${\bf x}_t$. If the estimate is good enough, we can terminate the above backward denoising process at an earlier stage; Otherwise, 
-we further denoise one timestep backwards, i.e. deriving ${\bf x}_{t-1}$ from ${\bf x}_t$. Based on ${\bf x}_{t-1}$, we may derive a better estimate of the clean image ${\bf x}_0$. This sampling process continues until we finally obtain a sufficiently good clean image ${\bf x}_0$. 
+$\mathbf{x}_t$, we may also directly estimate the original clean image $\mathbf{x}_0$ based on $\mathbf{x}_t$. If the estimate is good enough, we can terminate the above backward denoising process at an earlier stage; Otherwise, 
+we further denoise one timestep backwards, i.e. deriving $\mathbf{x}_{t-1}$ from $\mathbf{x}_t$. Based on $\mathbf{x}_{t-1}$, we may derive a better estimate of the clean image $\mathbf{x}_0$. This sampling process continues until we finally obtain a sufficiently good clean image $\mathbf{x}_0$. 
 
-In order to recover a slightly cleaner version of the image ${\bf x}_{t-1}$ from ${\bf x}_{t}$, we have two choices:
+In order to recover a slightly cleaner version of the image $\mathbf{x}_{t-1}$ from $\mathbf{x}_{t}$, we have two choices:
 
 #### **I. Estimating clean image $\mathbf{x}_0$**
 
