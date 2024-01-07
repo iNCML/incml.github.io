@@ -28,7 +28,7 @@ $$
 adhering to a predefined noise schedule: $\alpha_1, \alpha_2, \ldots, \alpha_T$, where the noise at each timestep is Gaussian, ${\boldsymbol \epsilon}_t \sim \mathcal{N}(0, \mathbf{I})$.
 This process gradually introduces more noise at each step, leading to a sequence of increasingly corrupted versions of the original image: $\mathbf{x}_0 \to \mathbf{x}_1 \to \mathbf{x}_2 \to  \cdots \to \mathbf{x}_T$. When $T$ is large enough, the last image $\mathbf{x}_T$ approaches to a Gaussian noise, i.e. $\mathbf{x}_T \sim \mathcal{N}(0, \mathbf{I})$.
 
-Building on the approach outlined in $[4]$, the above diffusion process can be implemented much more efficiently. Rather than sampling a unique Gaussian noise at each timestep, it is feasible to sample a single Gaussian noise, $ \boldsymbol{\epsilon} \sim \mathcal{N}(0, \mathbf{I})$, and employ the subsequent formula to efficiently generate all the corrupted samples in one go (along the left-to-right red dash arrow in Figure 1):
+Building on the so-called "nice property" outlined in $[4]$ $[5]$ $[6]$, the above diffusion process can be implemented much more efficiently. Rather than sampling a unique Gaussian noise at each timestep, it is feasible to sample a single Gaussian noise, $ \boldsymbol{\epsilon} \sim \mathcal{N}(0, \mathbf{I})$, and employ the subsequent formula to efficiently generate all the corrupted samples in one go (along the left-to-right red dash arrow in Figure 1):
 
 $$
 \mathbf{x}_t = f(\mathbf{x}_{0},t) = \sqrt{\bar{\alpha}_t} \mathbf{x}_{0} + \sqrt{1 - \bar{\alpha}_t} \,  {\boldsymbol \epsilon} \;\;\;\;\;\; \forall t=1, 2, \cdots, T
@@ -44,7 +44,7 @@ This method streamlines the process, making the generation of corrupted samples 
 
 <figure align="center">
   <img src="{{site.url}}/figures/deterministic-diffusion-process.png" width="700" alt> 
-  <figcaption> Figure 2. The deterministic difussion process of some images selected from the MNIST-Fashion dataset. 
+  <figcaption> Figure 2. The deterministic diffussion process of some images selected from the MNIST-Fashion dataset. 
   </figcaption> 
 </figure>
 
@@ -121,10 +121,11 @@ we gradually recover all corrupted images backwards one by one until we obtain t
 
 $$\mathbf{x}_T \to \mathbf{x}_{T-1} \to \mathbf{x}_{T-2} \to  \cdots \to \mathbf{x}_1 \to \mathbf{x}_0$$
 
-At each timestep, given the corrupted image 
-$x_t$, we may estimate the original clean image $x_0$ based on $x_t$. If the estimate is not good enough, we can 
-further denoise one timestep backwards, i.e. deriving $x_{t-1}$ from $x_t$. Based on $x_{t-1}$, we may derive a better estimate of the clean image $x_0$. This sampling process may continue until we finally obtain a sufficiently good clean image $x_0$. 
-In order to recover a slightly cleaner version of the image $x_{t-1}$ from $x_{t}$ from, we have two choices:
+Alternatively, at each timestep, given the corrupted image 
+${\bf x}_t$, we may also directly estimate the original clean image ${\bf x}_0$ based on ${\bf x}_t$. If the estimate is good enough, we can terminate the above backward denoising process at an earlier stage; Otherwise, 
+we further denoise one timestep backwards, i.e. deriving ${\bf x}_{t-1}$ from ${\bf x}_t$. Based on ${\bf x}_{t-1}$, we may derive a better estimate of the clean image ${\bf x}_0$. This sampling process continues until we finally obtain a sufficiently good clean image ${\bf x}_0$. 
+
+In order to recover a slightly cleaner version of the image ${\bf x}_{t-1}$ from ${\bf x}_{t}$, we have two choices:
 
 #### **I. Estimating clean image $\mathbf{x}_0$**
 
