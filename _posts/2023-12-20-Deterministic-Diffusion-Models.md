@@ -43,7 +43,7 @@ As shown in Figure 2, clean images are gradually converted into pure noises in t
 This method streamlines the process, making the generation of corrupted samples more straightforward and less computationally demanding. 
 
 <figure align="center">
-  <img src="{{site.url}}/figures/deterministic-diffusion-process.png" width="400" alt> 
+  <img src="{{site.url}}/figures/deterministic-diffusion-process.png" width="700" alt> 
   <figcaption> Figure 2. The deterministic difussion process of some images selected from the MNIST-Fashion dataset. 
   </figcaption> 
 </figure>
@@ -176,7 +176,7 @@ $$
 In Figure 3, we have shown some sampling results from the MNIST-Fashion dataset via building neural networks to estimate clean images through the above sampling algorithm. 
 
 <figure align="center">
-  <img src="{{site.url}}/figures/deterministic_denoising_via_cleanimage.png" width="400" alt> 
+  <img src="{{site.url}}/figures/deterministic_denoising_via_cleanimage.png" width="700" alt> 
   <figcaption> Figure 3. Some sampling results are shown from the MNIST-Fashion dataset via building neural networks to estimate clean images. Every two lines represent one sampling example: the first line displays denoising samples at each timestep while the second line shows the estimated clean image at each timestep.
   </figcaption> 
 </figure>
@@ -230,7 +230,7 @@ $$
 In Figure 4, we have shown some sampling results from the MNIST-Fashion dataset via building neural networks to estimate noises through the above sampling algorithm. 
 
 <figure align="center">
-  <img src="{{site.url}}/figures/deterministic_denoising_via_noise.png" width="400" alt> 
+  <img src="{{site.url}}/figures/deterministic_denoising_via_noise.png" width="700" alt> 
   <figcaption> Figure 4. Some sampling results are shown from the MNIST-Fashion dataset via building neural networks to estimate noises. Every two lines represent one sampling example: the first line displays denoising samples at each timestep while the second line shows the estimated clean image at each timestep.
   </figcaption> 
 </figure>
