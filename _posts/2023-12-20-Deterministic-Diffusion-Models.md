@@ -43,7 +43,7 @@ As shown in Figure 2, clean images are gradually converted into pure noises in t
 This method streamlines the process, making the generation of corrupted samples more straightforward and less computationally demanding. 
 
 <figure align="center">
-  <img src="{{site.url}}/figures/deterministic-diffusion-process.png" width="700" alt> 
+  <img src="{{site.url}}/figures/deterministic-diffusion-process.png" width="700" > 
   <figcaption> Figure 2. The deterministic diffussion process of some images selected from the MNIST-Fashion dataset. 
   </figcaption> 
 </figure>
@@ -187,7 +187,7 @@ In Figure 3, we have shown some sampling results from the MNIST-Fashion dataset 
 
 #### **II. Estimating noise ${\boldsymbol \epsilon}$**
 
-In this case, we construct a deep neural network to  $\boldsymbol \theta$ to approximate the inverse function via estimating the noise ${\boldsymbol \epsilon}$ from each corrupted image $\mathbf{x}_t$ at each timestep $t$:
+In this case, we construct a deep neural network $\boldsymbol \theta$ to approximate the inverse function via estimating the noise ${\boldsymbol \epsilon}$ from each corrupted image $\mathbf{x}_t$ at each timestep $t$:
 
 $$
 \hat{\boldsymbol \epsilon} = g^{-1}_{\boldsymbol \theta} (\mathbf{x}_t, t)
@@ -238,6 +238,7 @@ In Figure 4, we have shown some sampling results from the MNIST-Fashion dataset 
   </figcaption> 
 </figure>
 
+The above two methods are equivalent to the so-called Denoising Diffusion Implicit Models (DDIMs) method referenced in [7].   However, they are derived from a simpler and more intuitive procedure than the one described in [7].
 
 ### **References**
 
@@ -258,6 +259,8 @@ $[5]$ Calvin Luo, *Understanding Diffusion Models: A Unified Perspective*, [arXi
 ](https://arxiv.org/abs/2208.11970), 2022. 
 
 $[6]$ Sergios Karagiannakos,Nikolas Adaloglou, *How diffusion models work: the math from scratch*, [https://theaisummer.com/diffusion-models/](https://theaisummer.com/diffusion-models/).
+
+$[7]$ Jiaming Song, Chenlin Meng, Stefano Ermon, *Denoising Diffusion Implicit Models*, [arXiv:2010.02502](https://arxiv.org/abs/2010.02502), 2020.
 
 
 
