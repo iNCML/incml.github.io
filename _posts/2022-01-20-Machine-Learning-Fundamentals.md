@@ -38,7 +38,7 @@ This post provides complementary materials for my recent textbook [**Machine Lea
 - **Lab 5**: [Fully-Connected Neural Networks](https://github.com/iNCML/MachineLearningBook/blob/master/labs/pdf/Lab5_Fully_Connected_Neural_Networks.pdf) (available at [Colab](https://colab.research.google.com/drive/1TY3fAAS18lyGrlEsvLhaYm6fIBP7CDgD?usp=sharing), [ipynb](https://github.com/iNCML/MachineLearningBook/blob/master/labs/ipynb/Lab5_Fully_Connected_Neural_Networks.ipynb))
 - **Lab 6**: [Convolutional Neural Networks](https://github.com/iNCML/MachineLearningBook/blob/master/labs/pdf/Lab6_Convolutional_Neural_Networks.pdf)  (available at [Colab](https://colab.research.google.com/drive/1Zkeujeoh4jNR9bQ67kfuIE7cV6KifZS2?usp=sharing), [ipynb](https://github.com/iNCML/MachineLearningBook/blob/master/labs/ipynb/Lab6_Convolutional_Neural_Networks.ipynb))
 - **Lab 7**: [Transformers](https://github.com/iNCML/MachineLearningBook/blob/master/labs/pdf/Lab7_Transformers.pdf) (available at [Colab](https://colab.research.google.com/drive/1RvaBdX-KrgCNkVoo39UYqH1qzd-hAT5q), [ipynb](https://github.com/iNCML/MachineLearningBook/blob/master/labs/ipynb/Lab7_Transformers.ipynb)) 
-- **Lab 8**: Matrix Factorization 
+- **Lab 8**: [Matrix Factorization](ttps://github.com/iNCML/MachineLearningBook/blob/master/labs/pdf/Lab8_Matrix_Factorization.pdf) (available at [Colab](https://colab.research.google.com/drive/1JaGmlkrC03URmnfkKtOakckP_ds20-WA), [ipynb](https://github.com/iNCML/MachineLearningBook/blob/master/labs/ipynb/Lab8_Matrix_Factorization.ipynb)) 
 - **Lab 9**: Decision Trees, Random Forests and Boosted Trees 
 - **Lab 10**: Gaussian Classifiers and Gaussian Mixture Models 
 
